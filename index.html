@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tamil Nadu Blood Bank Management System - Department of Health & Family Welfare">
+  <title>TN Blood Bank - Donate Blood, Save Lives</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="header-icon-btn menu-btn" aria-label="Menu">☰</button>
+        <div class="header-logo">🛡️</div>
+        <div class="header-title-group">
+          <span class="header-title">TN Blood Bank</span>
+          <span class="header-subtitle">Dept. of Health & Family Welfare, Govt. of TN</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="header-icon-btn" aria-label="Notifications">
+          🔔
+          <span class="badge">3</span>
+        </button>
+        <button class="header-icon-btn" aria-label="Profile">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Side Navigation -->
+  <div class="side-nav-overlay"></div>
+  <nav class="side-nav">
+    <div class="side-nav-header">
+      <div class="header-logo">🛡️</div>
+      <div class="side-nav-header-text">
+        <h3>TN Blood Bank</h3>
+        <p>Government of Tamil Nadu</p>
+      </div>
+      <button class="side-nav-close" aria-label="Close">✕</button>
+    </div>
+    <div class="side-nav-menu">
+      <a href="index.html" class="side-nav-item active"><span class="nav-icon">🏠</span> Home</a>
+      <a href="pages/blood-availability.html" class="side-nav-item"><span class="nav-icon">🔍</span> Blood Availability</a>
+      <a href="pages/blood-request.html" class="side-nav-item"><span class="nav-icon">📋</span> Blood Request</a>
+      <a href="pages/donor-registration.html" class="side-nav-item"><span class="nav-icon">✍️</span> Donor Registration</a>
+      <a href="pages/emergency-request.html" class="side-nav-item"><span class="nav-icon">🚨</span> Emergency Request</a>
+      <div class="side-nav-divider"></div>
+      <a href="pages/blood-camps.html" class="side-nav-item"><span class="nav-icon">⛺</span> Donation Camps</a>
+      <a href="pages/donor-profile.html" class="side-nav-item"><span class="nav-icon">👤</span> Donor Profile</a>
+      <a href="pages/eligibility-checker.html" class="side-nav-item"><span class="nav-icon">✅</span> Eligibility Checker</a>
+      <div class="side-nav-divider"></div>
+      <a href="pages/hospital-login.html" class="side-nav-item"><span class="nav-icon">🏥</span> Hospital Login</a>
+      <a href="pages/bloodbank-login.html" class="side-nav-item"><span class="nav-icon">🩸</span> Blood Bank Login</a>
+      <a href="pages/admin-dashboard.html" class="side-nav-item"><span class="nav-icon">📊</span> Admin Dashboard</a>
+      <div class="side-nav-divider"></div>
+      <a href="pages/feedback.html" class="side-nav-item"><span class="nav-icon">💬</span> Feedback & Support</a>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">❤️ Every Drop Counts</div>
+        <h1>Donate Blood,<br>Save Lives</h1>
+        <p>One donation can save up to three lives. Join thousands of donors across Tamil Nadu in making a difference.</p>
+        <div class="hero-buttons">
+          <a href="pages/donor-registration.html" class="btn btn-white btn-lg">🩸 Donate Now</a>
+          <a href="pages/blood-request.html" class="btn btn-outline btn-lg" style="border-color:#fff;color:#fff;">📋 Request Blood</a>
+        </div>
+      </div>
+      <div class="hero-illustration">
+        <div class="hero-blood-drop">
+          <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 10C100 10 20 120 20 170C20 214 55.6 250 100 250C144.4 250 180 214 180 170C180 120 100 10 100 10Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <path d="M100 50C100 50 50 130 50 170C50 198 72.4 220 100 220C127.6 220 150 198 150 170C150 130 100 50 100 50Z" fill="rgba(255,255,255,0.1)"/>
+            <circle cx="80" cy="160" r="12" fill="rgba(255,255,255,0.2)"/>
+            <circle cx="110" cy="180" r="8" fill="rgba(255,255,255,0.15)"/>
+            <text x="100" y="175" text-anchor="middle" fill="white" font-size="32" font-weight="800">🩸</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon red">👥</div>
+        <div class="stat-number" data-count="52480">0</div>
+        <div class="stat-label">Registered Donors</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue">🏥</div>
+        <div class="stat-number" data-count="342">0</div>
+        <div class="stat-label">Blood Banks</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">🩸</div>
+        <div class="stat-number" data-count="28750">0</div>
+        <div class="stat-label">Units Available</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon orange">⛺</div>
+        <div class="stat-number" data-count="156">0</div>
+        <div class="stat-label">Upcoming Camps</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Services</h2>
+        <p>Access all blood bank services at your fingertips</p>
+      </div>
+      <div class="services-grid">
+        <a href="pages/blood-availability.html" class="service-card">
+          <div class="service-icon">🔍</div>
+          <span class="service-name">Blood Availability Search</span>
+        </a>
+        <a href="pages/blood-availability.html" class="service-card">
+          <div class="service-icon">📍</div>
+          <span class="service-name">Find Nearby Blood Bank</span>
+        </a>
+        <a href="pages/donor-registration.html" class="service-card">
+          <div class="service-icon">✍️</div>
+          <span class="service-name">Register as Donor</span>
+        </a>
+        <a href="pages/blood-request.html" class="service-card">
+          <div class="service-icon">📋</div>
+          <span class="service-name">Blood Request</span>
+        </a>
+        <a href="pages/emergency-request.html" class="service-card">
+          <div class="service-icon">🚨</div>
+          <span class="service-name">Emergency Blood Request</span>
+        </a>
+        <a href="pages/blood-camps.html" class="service-card">
+          <div class="service-icon">⛺</div>
+          <span class="service-name">Blood Donation Camps</span>
+        </a>
+        <a href="pages/hospital-login.html" class="service-card">
+          <div class="service-icon">🏥</div>
+          <span class="service-name">Hospital Login</span>
+        </a>
+        <a href="pages/bloodbank-login.html" class="service-card">
+          <div class="service-icon">🩸</div>
+          <span class="service-name">Blood Bank Login</span>
+        </a>
+        <a href="pages/admin-dashboard.html" class="service-card">
+          <div class="service-icon">📊</div>
+          <span class="service-name">Admin Dashboard</span>
+        </a>
+        <a href="pages/blood-camps.html" class="service-card">
+          <div class="service-icon">📝</div>
+          <span class="service-name">Camp Registration</span>
+        </a>
+        <a href="pages/donor-profile.html" class="service-card">
+          <div class="service-icon">📜</div>
+          <span class="service-name">Donor History</span>
+        </a>
+        <a href="pages/feedback.html" class="service-card">
+          <div class="service-icon">💬</div>
+          <span class="service-name">Feedback & Support</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Card -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="emergency-card">
+        <div class="pulse-icon">🆘</div>
+        <h3>Emergency Blood Needed?</h3>
+        <p>Get immediate assistance for emergency blood requirements. Our network of blood banks and donors is ready to help 24/7.</p>
+        <a href="pages/emergency-request.html" class="btn btn-white btn-lg">🚨 Find Blood Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Eligibility Section -->
+  <section class="section">
+    <div class="container">
+      <div class="eligibility-section">
+        <h3>Who Can Donate Blood? ✅</h3>
+        <p>Most people can donate blood. Check if you meet the basic eligibility criteria below.</p>
+        <div class="eligibility-criteria">
+          <div class="eligibility-item"><span class="check-icon">✅</span> Age between 18-65 years</div>
+          <div class="eligibility-item"><span class="check-icon">✅</span> Weight above 50 kg</div>
+          <div class="eligibility-item"><span class="check-icon">✅</span> Hemoglobin above 12.5 g/dL</div>
+          <div class="eligibility-item"><span class="check-icon">✅</span> Normal blood pressure</div>
+          <div class="eligibility-item"><span class="check-icon">✅</span> No major surgery in last 6 months</div>
+          <div class="eligibility-item"><span class="check-icon">✅</span> Not pregnant or breastfeeding</div>
+          <div class="eligibility-item"><span class="check-icon">✅</span> No infectious diseases</div>
+          <div class="eligibility-item"><span class="check-icon">✅</span> Last donation was 3+ months ago</div>
+        </div>
+        <div class="eligibility-buttons">
+          <a href="pages/eligibility-checker.html" class="btn btn-primary">✅ Check Eligibility</a>
+          <a href="pages/blood-camps.html" class="btn btn-outline">⛺ Find Nearby Camps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Announcements -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Latest Announcements</h2>
+        <p>Stay updated with the latest news and events</p>
+      </div>
+      <div class="announcements-scroll">
+        <div class="announcement-card">
+          <div class="announcement-img">⛺</div>
+          <div class="announcement-body">
+            <span class="announcement-tag camp">Blood Camp</span>
+            <h4>Mega Blood Donation Camp - Chennai</h4>
+            <p>January 26, 2025 at Rajiv Gandhi Government Hospital</p>
+          </div>
+        </div>
+        <div class="announcement-card">
+          <div class="announcement-img">📢</div>
+          <div class="announcement-body">
+            <span class="announcement-tag awareness">Awareness</span>
+            <h4>World Blood Donor Day Celebration</h4>
+            <p>June 14, 2025 - Special events across all districts</p>
+          </div>
+        </div>
+        <div class="announcement-card">
+          <div class="announcement-img">🏛️</div>
+          <div class="announcement-body">
+            <span class="announcement-tag govt">Government</span>
+            <h4>New Blood Bank Policy 2025</h4>
+            <p>Enhanced safety protocols and digital tracking system launched</p>
+          </div>
+        </div>
+        <div class="announcement-card">
+          <div class="announcement-img">⛺</div>
+          <div class="announcement-body">
+            <span class="announcement-tag camp">Blood Camp</span>
+            <h4>Coimbatore District Blood Drive</h4>
+            <p>February 10, 2025 at Coimbatore Medical College</p>
+          </div>
+        </div>
+        <div class="announcement-card">
+          <div class="announcement-img">📢</div>
+          <div class="announcement-body">
+            <span class="announcement-tag awareness">Awareness</span>
+            <h4>Thalassemia Awareness Program</h4>
+            <p>Free screening at all government hospitals throughout March</p>
+          </div>
+        </div>
+        <div class="announcement-card">
+          <div class="announcement-img">🏛️</div>
+          <div class="announcement-body">
+            <span class="announcement-tag govt">Government</span>
+            <h4>Blood Bank Mobile App Update</h4>
+            <p>Real-time blood availability tracking now available</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Health Tips Section -->
+  <section class="section" style="background:var(--gray-50)">
+    <div class="container">
+      <div class="section-title">
+        <h2>Health Tips for Donors</h2>
+        <p>Follow these guidelines for a safe donation experience</p>
+      </div>
+      <div class="health-tips-grid">
+        <div class="health-tip-card">
+          <div class="health-tip-icon" style="background:var(--success-bg);color:var(--success);">🍎</div>
+          <h4>Before Donation</h4>
+          <ul>
+            <li>Get a good night's sleep</li>
+            <li>Eat a healthy meal</li>
+            <li>Drink extra water</li>
+            <li>Avoid fatty foods</li>
+            <li>Bring valid ID</li>
+          </ul>
+        </div>
+        <div class="health-tip-card">
+          <div class="health-tip-icon" style="background:var(--info-bg);color:var(--info);">💪</div>
+          <h4>During Donation</h4>
+          <ul>
+            <li>Stay relaxed and calm</li>
+            <li>Squeeze the stress ball</li>
+            <li>Inform staff if uncomfortable</li>
+            <li>Don't look at the needle</li>
+            <li>Keep breathing normally</li>
+          </ul>
+        </div>
+        <div class="health-tip-card">
+          <div class="health-tip-icon" style="background:var(--warning-bg);color:var(--warning);">☕</div>
+          <h4>After Donation</h4>
+          <ul>
+            <li>Rest for 10-15 minutes</li>
+            <li>Have juice and snacks</li>
+            <li>Drink plenty of fluids</li>
+            <li>Avoid heavy exercise</li>
+            <li>Keep bandage on for 4 hrs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:var(--gray-900);color:var(--gray-400);padding:var(--spacing-4) 0 var(--spacing-6)">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr;gap:var(--spacing-3);text-align:center">
+        <div>
+          <div style="font-size:1.5rem;margin-bottom:8px">🛡️</div>
+          <h4 style="color:var(--white);margin-bottom:4px">TN Blood Bank Management System</h4>
+          <p style="font-size:0.813rem;color:var(--gray-500)">Department of Health & Family Welfare<br>Government of Tamil Nadu</p>
+        </div>
+        <div>
+          <p style="font-size:0.813rem">📞 Emergency Helpline: <strong style="color:var(--white)">104</strong></p>
+          <p style="font-size:0.813rem">📧 Email: bloodbank@tn.gov.in</p>
+          <p style="font-size:0.813rem">🌐 www.tnbloodbank.gov.in</p>
+        </div>
+        <div style="border-top:1px solid var(--gray-800);padding-top:var(--spacing-2)">
+          <p style="font-size:0.75rem;color:var(--gray-600)">© 2025 Tamil Nadu Blood Bank Management System. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating AI Assistant -->
+  <div class="ai-assistant">
+    <div class="ai-assistant-chat">
+      <div class="ai-chat-header">
+        <h4>🤖 Health Assistant</h4>
+        <button class="ai-chat-close" style="color:var(--white)">✕</button>
+      </div>
+      <div class="ai-chat-messages">
+        <div class="ai-message bot">Hello! 👋 I'm your health assistant. How can I help you today? You can ask me about blood donation eligibility, nearby blood banks, or donation camps.</div>
+      </div>
+      <div class="ai-chat-input">
+        <input type="text" placeholder="Ask me anything...">
+        <button>Send</button>
+      </div>
+    </div>
+    <button class="ai-assistant-btn" aria-label="AI Assistant">🤖</button>
+    <span class="ai-assistant-label">Ask Health Assistant</span>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="bottom-nav-item active">
+      <span class="nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="pages/blood-availability.html" class="bottom-nav-item">
+      <span class="nav-icon">🔍</span>
+      <span>Search</span>
+    </a>
+    <a href="pages/donor-registration.html" class="bottom-nav-item donate-btn">
+      <span class="nav-icon-wrap">🩸</span>
+      <span>Donate</span>
+    </a>
+    <a href="pages/blood-request.html" class="bottom-nav-item">
+      <span class="nav-icon">📋</span>
+      <span>Requests</span>
+    </a>
+    <a href="pages/donor-profile.html" class="bottom-nav-item">
+      <span class="nav-icon">👤</span>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>

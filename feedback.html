@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Share feedback or get support">
+  <title>Feedback & Support - TN Blood Bank</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
+</head>
+<body>
+  <!-- Header Component - Included via JS -->
+<header class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <button class="header-icon-btn menu-btn" aria-label="Menu">☰</button>
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+        <div class="header-logo">🛡️</div>
+        <div class="header-title-group">
+          <span class="header-title">TN Blood Bank</span>
+          <span class="header-subtitle">Dept. of Health & Family Welfare, Govt. of TN</span>
+        </div>
+      </a>
+    </div>
+    <div class="header-right">
+      <button class="header-icon-btn" aria-label="Notifications">🔔<span class="badge">3</span></button>
+      <a href="donor-profile.html" class="header-icon-btn" aria-label="Profile">👤</a>
+    </div>
+  </div>
+</header>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <div class="side-nav-overlay"></div>
+<nav class="side-nav">
+  <div class="side-nav-header">
+    <div class="header-logo">🛡️</div>
+    <div class="side-nav-header-text">
+      <h3>TN Blood Bank</h3>
+      <p>Government of Tamil Nadu</p>
+    </div>
+    <button class="side-nav-close" aria-label="Close">✕</button>
+  </div>
+  <div class="side-nav-menu">
+    <a href="../index.html" class="side-nav-item"><span class="nav-icon">🏠</span> Home</a>
+    <a href="blood-availability.html" class="side-nav-item"><span class="nav-icon">🔍</span> Blood Availability</a>
+    <a href="blood-request.html" class="side-nav-item"><span class="nav-icon">📋</span> Blood Request</a>
+    <a href="donor-registration.html" class="side-nav-item"><span class="nav-icon">✍️</span> Donor Registration</a>
+    <a href="emergency-request.html" class="side-nav-item"><span class="nav-icon">🚨</span> Emergency Request</a>
+    <div class="side-nav-divider"></div>
+    <a href="blood-camps.html" class="side-nav-item"><span class="nav-icon">⛺</span> Donation Camps</a>
+    <a href="donor-profile.html" class="side-nav-item"><span class="nav-icon">👤</span> Donor Profile</a>
+    <a href="eligibility-checker.html" class="side-nav-item"><span class="nav-icon">✅</span> Eligibility Checker</a>
+    <div class="side-nav-divider"></div>
+    <a href="hospital-login.html" class="side-nav-item"><span class="nav-icon">🏥</span> Hospital Login</a>
+    <a href="bloodbank-login.html" class="side-nav-item"><span class="nav-icon">🩸</span> Blood Bank Login</a>
+    <a href="admin-dashboard.html" class="side-nav-item"><span class="nav-icon">📊</span> Admin Dashboard</a>
+    <div class="side-nav-divider"></div>
+    <a href="feedback.html" class="side-nav-item active"><span class="nav-icon">💬</span> Feedback & Support</a>
+  </div>
+</nav>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  
+<section class="page-header">
+  <div class="container">
+    <a href="../index.html" class="page-header-back">←</a>
+    <h1>💬 Feedback & Support</h1>
+    <p>Share your experience or get help with any issues</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:640px">
+    <!-- Feedback Rating -->
+    <div class="card" style="margin-bottom:var(--spacing-3)">
+      <div class="card-body" style="text-align:center">
+        <h3 style="margin-bottom:var(--spacing-2)">How was your experience?</h3>
+        <div class="feedback-options">
+          <div class="feedback-option"><span class="emoji">😊</span><span class="label">Excellent</span></div>
+          <div class="feedback-option"><span class="emoji">🙂</span><span class="label">Good</span></div>
+          <div class="feedback-option"><span class="emoji">😐</span><span class="label">Average</span></div>
+          <div class="feedback-option"><span class="emoji">😕</span><span class="label">Poor</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Form -->
+    <div class="card" style="margin-bottom:var(--spacing-3)">
+      <div class="card-body">
+        <form id="feedbackForm">
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select class="form-select" required>
+              <option value="">Select Category</option>
+              <option>Blood Donation Experience</option>
+              <option>Blood Bank Service</option>
+              <option>Website/App Feedback</option>
+              <option>Camp Organization</option>
+              <option>Complaint</option>
+              <option>Suggestion</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Name *</label>
+            <input type="text" class="form-input" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="your.email@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mobile Number</label>
+            <input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Feedback *</label>
+            <textarea class="form-textarea" placeholder="Share your experience, suggestions, or concerns..." required style="min-height:120px"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Attach Screenshot (Optional)</label>
+            <input type="file" class="form-input" style="padding:10px" accept="image/*">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg">💬 Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="card" style="margin-bottom:var(--spacing-3)">
+      <div class="card-body">
+        <h4 style="margin-bottom:var(--spacing-2)">❓ Frequently Asked Questions</h4>
+        <div style="border-bottom:1px solid var(--gray-200);padding:12px 0">
+          <h5 style="font-size:0.938rem;cursor:pointer">How often can I donate blood? ▾</h5>
+          <p style="font-size:0.813rem;color:var(--gray-600);padding-top:4px">You can donate whole blood every 3 months (90 days). Platelet donation can be done every 2 weeks.</p>
+        </div>
+        <div style="border-bottom:1px solid var(--gray-200);padding:12px 0">
+          <h5 style="font-size:0.938rem;cursor:pointer">Is blood donation safe? ▾</h5>
+          <p style="font-size:0.813rem;color:var(--gray-600);padding-top:4px">Yes, blood donation is completely safe. Sterile, disposable equipment is used for each donor.</p>
+        </div>
+        <div style="border-bottom:1px solid var(--gray-200);padding:12px 0">
+          <h5 style="font-size:0.938rem;cursor:pointer">How long does donation take? ▾</h5>
+          <p style="font-size:0.813rem;color:var(--gray-600);padding-top:4px">The actual donation takes about 8-10 minutes. The entire process including screening takes 30-45 minutes.</p>
+        </div>
+        <div style="padding:12px 0">
+          <h5 style="font-size:0.938rem;cursor:pointer">What should I do after donating? ▾</h5>
+          <p style="font-size:0.813rem;color:var(--gray-600);padding-top:4px">Rest for 10-15 minutes, drink plenty of fluids, avoid heavy exercise for 24 hours, and keep the bandage on for 4 hours.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support Contacts -->
+    <div class="card">
+      <div class="card-body">
+        <h4 style="margin-bottom:var(--spacing-2)">📞 Contact Support</h4>
+        <div class="emergency-contacts">
+          <div class="emergency-contact-card">
+            <div class="contact-icon">📞</div>
+            <div class="contact-info"><h5>Helpline</h5><p>104 (24/7)</p></div>
+          </div>
+          <div class="emergency-contact-card">
+            <div class="contact-icon">📧</div>
+            <div class="contact-info"><h5>Email Support</h5><p>support@tnbloodbank.gov.in</p></div>
+          </div>
+          <div class="emergency-contact-card">
+            <div class="contact-icon">🏢</div>
+            <div class="contact-info"><h5>Office Address</h5><p>Directorate of Health, Chennai - 600006</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <div class="ai-assistant">
+  <div class="ai-assistant-chat">
+    <div class="ai-chat-header">
+      <h4>🤖 Health Assistant</h4>
+      <button class="ai-chat-close" style="color:var(--white)">✕</button>
+    </div>
+    <div class="ai-chat-messages">
+      <div class="ai-message bot">Hello! 👋 I'm your health assistant. How can I help you today?</div>
+    </div>
+    <div class="ai-chat-input">
+      <input type="text" placeholder="Ask me anything...">
+      <button>Send</button>
+    </div>
+  </div>
+  <button class="ai-assistant-btn" aria-label="AI Assistant">🤖</button>
+  <span class="ai-assistant-label">Ask Health Assistant</span>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <nav class="bottom-nav">
+  <a href="../index.html" class="bottom-nav-item"><span class="nav-icon">🏠</span><span>Home</span></a>
+  <a href="blood-availability.html" class="bottom-nav-item"><span class="nav-icon">🔍</span><span>Search</span></a>
+  <a href="donor-registration.html" class="bottom-nav-item donate-btn"><span class="nav-icon-wrap">🩸</span><span>Donate</span></a>
+  <a href="blood-request.html" class="bottom-nav-item"><span class="nav-icon">📋</span><span>Requests</span></a>
+  <a href="donor-profile.html" class="bottom-nav-item"><span class="nav-icon">👤</span><span>Profile</span></a>
+</nav>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

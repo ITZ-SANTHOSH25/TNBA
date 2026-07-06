@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View your donor profile and history">
+  <title>Donor Profile - TN Blood Bank</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
+</head>
+<body>
+  <!-- Header Component -->
+  <header class="header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="header-icon-btn menu-btn" aria-label="Menu">☰</button>
+        <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+          <div class="header-logo">🛡️</div>
+          <div class="header-title-group">
+            <span class="header-title">TN Blood Bank</span>
+            <span class="header-subtitle">Dept. of Health & Family Welfare, Govt. of TN</span>
+          </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <button class="header-icon-btn" aria-label="Notifications">🔔<span class="badge">3</span></button>
+        <a href="donor-profile.html" class="header-icon-btn" aria-label="Profile">👤</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="side-nav-overlay"></div>
+  <nav class="side-nav">
+    <div class="side-nav-header">
+      <div class="header-logo">🛡️</div>
+      <div class="side-nav-header-text">
+        <h3>TN Blood Bank</h3>
+        <p>Government of Tamil Nadu</p>
+      </div>
+      <button class="side-nav-close" aria-label="Close">✕</button>
+    </div>
+    <div class="side-nav-menu">
+      <a href="../index.html" class="side-nav-item"><span class="nav-icon">🏠</span> Home</a>
+      <a href="blood-availability.html" class="side-nav-item"><span class="nav-icon">🔍</span> Blood Availability</a>
+      <a href="blood-request.html" class="side-nav-item"><span class="nav-icon">📋</span> Blood Request</a>
+      <a href="donor-registration.html" class="side-nav-item"><span class="nav-icon">✍️</span> Donor Registration</a>
+      <a href="emergency-request.html" class="side-nav-item"><span class="nav-icon">🚨</span> Emergency Request</a>
+      <div class="side-nav-divider"></div>
+      <a href="blood-camps.html" class="side-nav-item"><span class="nav-icon">⛺</span> Donation Camps</a>
+      <a href="donor-profile.html" class="side-nav-item active"><span class="nav-icon">👤</span> Donor Profile</a>
+      <a href="eligibility-checker.html" class="side-nav-item"><span class="nav-icon">✅</span> Eligibility Checker</a>
+      <div class="side-nav-divider"></div>
+      <a href="hospital-login.html" class="side-nav-item"><span class="nav-icon">🏥</span> Hospital Login</a>
+      <a href="bloodbank-login.html" class="side-nav-item"><span class="nav-icon">🩸</span> Blood Bank Login</a>
+      <a href="admin-dashboard.html" class="side-nav-item"><span class="nav-icon">📊</span> Admin Dashboard</a>
+      <div class="side-nav-divider"></div>
+      <a href="feedback.html" class="side-nav-item"><span class="nav-icon">💬</span> Feedback & Support</a>
+    </div>
+  </nav>
+
+  <!-- Profile Header -->
+  <section class="profile-header">
+    <div class="profile-avatar">👤</div>
+    <h2>Rajesh Kumar</h2>
+    <p>Donor ID: TN-CH-05248 | Blood Group: <strong>B+</strong></p>
+    <div class="profile-stats">
+      <div class="profile-stat"><div class="value">12</div><div class="label">Donations</div></div>
+      <div class="profile-stat"><div class="value">36</div><div class="label">Lives Saved</div></div>
+      <div class="profile-stat"><div class="value">3</div><div class="label">Years</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:640px">
+      <!-- Next Eligible Date -->
+      <div class="alert alert-info" style="margin-bottom:var(--spacing-3)">
+        <span class="alert-icon">📅</span>
+        <span>You're eligible to donate again on <strong>April 15, 2025</strong>. Book your next appointment!</span>
+      </div>
+
+      <!-- Profile Menu -->
+      <div class="card" style="margin-bottom:var(--spacing-3)">
+        <div class="profile-menu-item">
+          <div class="menu-icon" style="background:var(--primary-bg);color:var(--primary)">👤</div>
+          <div class="menu-text"><h5>Personal Information</h5><p>View and update your personal details</p></div>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="profile-menu-item">
+          <div class="menu-icon" style="background:var(--success-bg);color:var(--success)">🩸</div>
+          <div class="menu-text"><h5>Donation History</h5><p>View your past donation records</p></div>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="profile-menu-item">
+          <div class="menu-icon" style="background:var(--info-bg);color:var(--info)">📋</div>
+          <div class="menu-text"><h5>My Blood Requests</h5><p>Track your blood request status</p></div>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="profile-menu-item">
+          <div class="menu-icon" style="background:var(--warning-bg);color:var(--warning)">🔔</div>
+          <div class="menu-text"><h5>Notifications</h5><p>Manage alert preferences</p></div>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="profile-menu-item">
+          <div class="menu-icon" style="background:var(--danger-bg);color:var(--danger)">⛺</div>
+          <div class="menu-text"><h5>Upcoming Camps</h5><p>View camps you've registered for</p></div>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="profile-menu-item">
+          <div class="menu-icon" style="background:var(--gray-100);color:var(--gray-700)">🏅</div>
+          <div class="menu-text"><h5>Achievements</h5><p>View your donor badges and milestones</p></div>
+          <span class="menu-arrow">›</span>
+        </div>
+      </div>
+
+      <!-- Donation History -->
+      <div class="card" style="margin-bottom:var(--spacing-3)">
+        <div class="card-body">
+          <h4 style="margin-bottom:var(--spacing-2)">🩸 Donation History</h4>
+          <div class="history-item">
+            <div class="history-date"><div class="day">15</div><div class="month">Jan</div></div>
+            <div class="history-details"><h5>GH Chennai Blood Bank</h5><p>Whole Blood - 350ml | B+ | TN-CH-05248</p></div>
+          </div>
+          <div class="history-item">
+            <div class="history-date"><div class="day">22</div><div class="month">Oct</div></div>
+            <div class="history-details"><h5>TIDEL Park Camp</h5><p>Whole Blood - 350ml | B+ | TN-CH-05248</p></div>
+          </div>
+          <div class="history-item">
+            <div class="history-date"><div class="day">05</div><div class="month">Jul</div></div>
+            <div class="history-details"><h5>Stanley Medical College</h5><p>Platelet Donation | B+ | TN-CH-05248</p></div>
+          </div>
+          <div class="history-item">
+            <div class="history-date"><div class="day">18</div><div class="month">Apr</div></div>
+            <div class="history-details"><h5>GH Chennai Blood Bank</h5><p>Whole Blood - 350ml | B+ | TN-CH-05248</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements -->
+      <div class="card">
+        <div class="card-body">
+          <h4 style="margin-bottom:var(--spacing-2)">🏅 Achievements</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <div style="text-align:center;padding:12px;background:var(--gray-50);border-radius:var(--radius-md);min-width:80px">
+              <div style="font-size:2rem">🥇</div>
+              <div style="font-size:0.75rem;font-weight:600;margin-top:4px">First Donor</div>
+            </div>
+            <div style="text-align:center;padding:12px;background:var(--gray-50);border-radius:var(--radius-md);min-width:80px">
+              <div style="font-size:2rem">⭐</div>
+              <div style="font-size:0.75rem;font-weight:600;margin-top:4px">10+ Donations</div>
+            </div>
+            <div style="text-align:center;padding:12px;background:var(--gray-50);border-radius:var(--radius-md);min-width:80px">
+              <div style="font-size:2rem">❤️</div>
+              <div style="font-size:0.75rem;font-weight:600;margin-top:4px">Life Saver</div>
+            </div>
+            <div style="text-align:center;padding:12px;background:var(--primary-bg);border-radius:var(--radius-md);min-width:80px;border:2px dashed var(--primary)">
+              <div style="font-size:2rem;opacity:0.4">🏆</div>
+              <div style="font-size:0.75rem;font-weight:600;margin-top:4px;color:var(--gray-400)">20+ Donations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Assistant Component -->
+  <div class="ai-assistant">
+    <div class="ai-assistant-chat">
+      <div class="ai-chat-header">
+        <h4>🤖 Health Assistant</h4>
+        <button class="ai-chat-close" style="color:var(--white)">✕</button>
+      </div>
+      <div class="ai-chat-messages">
+        <div class="ai-message bot">Hello! 👋 I'm your health assistant. How can I help you today?</div>
+      </div>
+      <div class="ai-chat-input">
+        <input type="text" placeholder="Ask me anything...">
+        <button>Send</button>
+      </div>
+    </div>
+    <button class="ai-assistant-btn" aria-label="AI Assistant">🤖</button>
+    <span class="ai-assistant-label">Ask Health Assistant</span>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="../index.html" class="bottom-nav-item"><span class="nav-icon">🏠</span><span>Home</span></a>
+    <a href="blood-availability.html" class="bottom-nav-item"><span class="nav-icon">🔍</span><span>Search</span></a>
+    <a href="donor-registration.html" class="bottom-nav-item donate-btn"><span class="nav-icon-wrap">🩸</span><span>Donate</span></a>
+    <a href="blood-request.html" class="bottom-nav-item"><span class="nav-icon">📋</span><span>Requests</span></a>
+    <a href="donor-profile.html" class="bottom-nav-item"><span class="nav-icon">👤</span><span>Profile</span></a>
+  </nav>
+
+  <script src="../script.js"></script>
+</body>
+</html>

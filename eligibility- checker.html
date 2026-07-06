@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Check your blood donation eligibility">
+  <title>Eligibility Checker - TN Blood Bank</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
+</head>
+<body>
+  <!-- Header Component - Included via JS -->
+<header class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <button class="header-icon-btn menu-btn" aria-label="Menu">☰</button>
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+        <div class="header-logo">🛡️</div>
+        <div class="header-title-group">
+          <span class="header-title">TN Blood Bank</span>
+          <span class="header-subtitle">Dept. of Health & Family Welfare, Govt. of TN</span>
+        </div>
+      </a>
+    </div>
+    <div class="header-right">
+      <button class="header-icon-btn" aria-label="Notifications">🔔<span class="badge">3</span></button>
+      <a href="donor-profile.html" class="header-icon-btn" aria-label="Profile">👤</a>
+    </div>
+  </div>
+</header>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <div class="side-nav-overlay"></div>
+<nav class="side-nav">
+  <div class="side-nav-header">
+    <div class="header-logo">🛡️</div>
+    <div class="side-nav-header-text">
+      <h3>TN Blood Bank</h3>
+      <p>Government of Tamil Nadu</p>
+    </div>
+    <button class="side-nav-close" aria-label="Close">✕</button>
+  </div>
+  <div class="side-nav-menu">
+    <a href="../index.html" class="side-nav-item"><span class="nav-icon">🏠</span> Home</a>
+    <a href="blood-availability.html" class="side-nav-item"><span class="nav-icon">🔍</span> Blood Availability</a>
+    <a href="blood-request.html" class="side-nav-item"><span class="nav-icon">📋</span> Blood Request</a>
+    <a href="donor-registration.html" class="side-nav-item"><span class="nav-icon">✍️</span> Donor Registration</a>
+    <a href="emergency-request.html" class="side-nav-item"><span class="nav-icon">🚨</span> Emergency Request</a>
+    <div class="side-nav-divider"></div>
+    <a href="blood-camps.html" class="side-nav-item"><span class="nav-icon">⛺</span> Donation Camps</a>
+    <a href="donor-profile.html" class="side-nav-item"><span class="nav-icon">👤</span> Donor Profile</a>
+    <a href="eligibility-checker.html" class="side-nav-item active"><span class="nav-icon">✅</span> Eligibility Checker</a>
+    <div class="side-nav-divider"></div>
+    <a href="hospital-login.html" class="side-nav-item"><span class="nav-icon">🏥</span> Hospital Login</a>
+    <a href="bloodbank-login.html" class="side-nav-item"><span class="nav-icon">🩸</span> Blood Bank Login</a>
+    <a href="admin-dashboard.html" class="side-nav-item"><span class="nav-icon">📊</span> Admin Dashboard</a>
+    <div class="side-nav-divider"></div>
+    <a href="feedback.html" class="side-nav-item"><span class="nav-icon">💬</span> Feedback & Support</a>
+  </div>
+</nav>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  
+<section class="page-header">
+  <div class="container">
+    <a href="../index.html" class="page-header-back">←</a>
+    <h1>✅ Eligibility Checker</h1>
+    <p>Check if you're eligible to donate blood</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:640px">
+    <div class="card">
+      <div class="card-body">
+        <div class="eligibility-checker">
+          <!-- Step Indicator -->
+          <div class="step-indicator">
+            <div class="step-dot active"></div>
+            <div class="step-dot"></div>
+            <div class="step-dot"></div>
+            <div class="step-dot"></div>
+            <div class="step-dot"></div>
+          </div>
+
+          <!-- Step 1: Age -->
+          <div class="eligibility-step active">
+            <div class="eligibility-question">
+              <h4>🎂 Are you between 18 and 65 years of age?</h4>
+              <div class="question-options">
+                <div class="question-option yes">Yes</div>
+                <div class="question-option no">No</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;gap:12px">
+              <button class="btn btn-primary elig-next">Next →</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Weight -->
+          <div class="eligibility-step">
+            <div class="eligibility-question">
+              <h4>⚖️ Do you weigh at least 50 kg (110 lbs)?</h4>
+              <div class="question-options">
+                <div class="question-option yes">Yes</div>
+                <div class="question-option no">No</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:12px">
+              <button class="btn btn-outline elig-prev">← Back</button>
+              <button class="btn btn-primary elig-next">Next →</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Health -->
+          <div class="eligibility-step">
+            <div class="eligibility-question">
+              <h4>💪 Are you in generally good health today?</h4>
+              <div class="question-options">
+                <div class="question-option yes">Yes</div>
+                <div class="question-option no">No</div>
+              </div>
+            </div>
+            <div class="eligibility-question">
+              <h4>🌡️ Is your hemoglobin level above 12.5 g/dL?</h4>
+              <div class="question-options">
+                <div class="question-option yes">Yes</div>
+                <div class="question-option no">Not Sure</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:12px">
+              <button class="btn btn-outline elig-prev">← Back</button>
+              <button class="btn btn-primary elig-next">Next →</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Medical History -->
+          <div class="eligibility-step">
+            <div class="eligibility-question">
+              <h4>🏥 Have you had any major surgery in the last 6 months?</h4>
+              <div class="question-options">
+                <div class="question-option no">No</div>
+                <div class="question-option yes">Yes</div>
+              </div>
+            </div>
+            <div class="eligibility-question">
+              <h4>🤰 Are you currently pregnant or breastfeeding?</h4>
+              <div class="question-options">
+                <div class="question-option no">No</div>
+                <div class="question-option yes">Yes</div>
+              </div>
+            </div>
+            <div class="eligibility-question">
+              <h4>💊 Have you taken any antibiotics in the last 7 days?</h4>
+              <div class="question-options">
+                <div class="question-option no">No</div>
+                <div class="question-option yes">Yes</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:12px">
+              <button class="btn btn-outline elig-prev">← Back</button>
+              <button class="btn btn-primary elig-next">Check Result →</button>
+            </div>
+          </div>
+
+          <!-- Step 5: Result -->
+          <div class="eligibility-step">
+            <div class="eligibility-result" id="resultContainer">
+              <div class="result-icon" id="resultIcon">✅</div>
+              <h3 id="resultTitle" style="color:var(--success)">You Appear to Be Eligible!</h3>
+              <p id="resultText" style="color:var(--gray-600);max-width:400px;margin:var(--spacing-2) auto">Based on your answers, you may be eligible to donate blood. Final eligibility will be confirmed during the medical screening at the donation center.</p>
+              <div id="resultActions" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                <a href="donor-registration.html" class="btn btn-primary btn-lg">✍️ Register as Donor</a>
+                <a href="blood-camps.html" class="btn btn-outline btn-lg">⛺ Find Camps</a>
+              </div>
+            </div>
+            <div style="text-align:center;margin-top:var(--spacing-3)">
+              <button class="btn btn-outline elig-restart">🔄 Check Again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Important Notes -->
+    <div style="margin-top:var(--spacing-3)">
+      <div class="alert alert-warning">
+        <span class="alert-icon">⚠️</span>
+        <span>This checker provides preliminary guidance only. Final eligibility is determined by medical professionals at the donation center.</span>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h4 style="margin-bottom:var(--spacing-2)">📋 Additional Deferral Criteria</h4>
+          <div class="eligibility-criteria">
+            <div class="eligibility-item"><span class="check-icon">❌</span> Tattoo or piercing in last 6 months</div>
+            <div class="eligibility-item"><span class="check-icon">❌</span> Blood transfusion in last 12 months</div>
+            <div class="eligibility-item"><span class="check-icon">❌</span> History of hepatitis B or C</div>
+            <div class="eligibility-item"><span class="check-icon">❌</span> HIV positive or high-risk behavior</div>
+            <div class="eligibility-item"><span class="check-icon">❌</span> Diabetes on insulin therapy</div>
+            <div class="eligibility-item"><span class="check-icon">❌</span> Epilepsy or seizure disorder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <div class="ai-assistant">
+  <div class="ai-assistant-chat">
+    <div class="ai-chat-header">
+      <h4>🤖 Health Assistant</h4>
+      <button class="ai-chat-close" style="color:var(--white)">✕</button>
+    </div>
+    <div class="ai-chat-messages">
+      <div class="ai-message bot">Hello! 👋 I'm your health assistant. How can I help you today?</div>
+    </div>
+    <div class="ai-chat-input">
+      <input type="text" placeholder="Ask me anything...">
+      <button>Send</button>
+    </div>
+  </div>
+  <button class="ai-assistant-btn" aria-label="AI Assistant">🤖</button>
+  <span class="ai-assistant-label">Ask Health Assistant</span>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <nav class="bottom-nav">
+  <a href="../index.html" class="bottom-nav-item"><span class="nav-icon">🏠</span><span>Home</span></a>
+  <a href="blood-availability.html" class="bottom-nav-item"><span class="nav-icon">🔍</span><span>Search</span></a>
+  <a href="donor-registration.html" class="bottom-nav-item donate-btn"><span class="nav-icon-wrap">🩸</span><span>Donate</span></a>
+  <a href="blood-request.html" class="bottom-nav-item"><span class="nav-icon">📋</span><span>Requests</span></a>
+  <a href="donor-profile.html" class="bottom-nav-item"><span class="nav-icon">👤</span><span>Profile</span></a>
+</nav>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Side Navigation Toggle functionality
+      const menuBtn = document.querySelector('.menu-btn');
+      const sideNav = document.querySelector('.side-nav');
+      const sideNavOverlay = document.querySelector('.side-nav-overlay');
+      const sideNavClose = document.querySelector('.side-nav-close');
+
+      if (menuBtn && sideNav && sideNavOverlay) {
+        menuBtn.addEventListener('click', () => {
+          sideNav.classList.add('active');
+          sideNavOverlay.classList.add('active');
+        });
+
+        const closeNav = () => {
+          sideNav.classList.remove('active');
+          sideNavOverlay.classList.remove('active');
+        };
+
+        sideNavOverlay.addEventListener('click', closeNav);
+        if (sideNavClose) sideNavClose.addEventListener('click', closeNav);
+      }
+
+      // AI Assistant Panel Toggle
+      const aiBtn = document.querySelector('.ai-assistant-btn');
+      const aiChat = document.querySelector('.ai-assistant-chat');
+      const aiClose = document.querySelector('.ai-chat-close');
+
+      if (aiBtn && aiChat) {
+        aiBtn.addEventListener('click', () => aiChat.classList.toggle('active'));
+        if (aiClose) aiClose.addEventListener('click', () => aiChat.classList.remove('active'));
+      }
+
+      // Multi-step form configuration & navigation
+      let currentStep = 0;
+      const steps = document.querySelectorAll('.eligibility-step');
+      const dots = document.querySelectorAll('.step-dot');
+
+      function updateFormUI() {
+        steps.forEach((step, index) => {
+          if (index === currentStep) {
+            step.classList.add('active');
+          } else {
+            step.classList.remove('active');
+          }
+        });
+
+        dots.forEach((dot, index) => {
+          if (index === currentStep) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      // Option selections dynamic activation
+      document.querySelectorAll('.question-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const optionsGroup = this.parentElement.querySelectorAll('.question-option');
+          optionsGroup.forEach(opt => opt.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+
+      // Next buttons control
+      document.querySelectorAll('.elig-next').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const currentStepElement = steps[currentStep];
+          const visibleQuestions = currentStepElement.querySelectorAll('.eligibility-question');
+          let allAnswered = true;
+
+          visibleQuestions.forEach(q => {
+            const hasSelection = q.querySelector('.question-option.selected');
+            if (!hasSelection) {
+              allAnswered = false;
+              q.style.outline = "1px solid var(--danger, #dc3545)";
+              setTimeout(() => q.style.outline = "none", 2000);
+            }
+          });
+
+          if (!allAnswered) {
+            alert('Please answer all questions on this page before moving forward.');
+            return;
+          }
+
+          if (currentStep < steps.length - 1) {
+            currentStep++;
+            if (currentStep === steps.length - 1) {
+              calculateEligibilityResult();
+            }
+            updateFormUI();
+          }
+        });
+      });
+
+      // Back buttons control
+      document.querySelectorAll('.elig-prev').forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (currentStep > 0) {
+            currentStep--;
+            updateFormUI();
+          }
+        });
+      });
+
+      // Restart function
+      const restartBtn = document.querySelector('.elig-restart');
+      if (restartBtn) {
+        restartBtn.addEventListener('click', function() {
+          currentStep = 0;
+          document.querySelectorAll('.question-option').forEach(opt => opt.classList.remove('selected'));
+          updateFormUI();
+        });
+      }
+
+      // Dynamic calculation rules based on blood safety parameters
+      function calculateEligibilityResult() {
+        const yesOptions = document.querySelectorAll('.question-option.yes.selected');
+        const noOptions = document.querySelectorAll('.question-option.no.selected');
+
+        let isEligible = true;
+        let reasons = [];
+
+        // Check each critical question condition
+        document.querySelectorAll('.eligibility-question').forEach(q => {
+          const headingText = q.querySelector('h4').textContent;
+          const selectedOption = q.querySelector('.question-option.selected');
+          
+          if (!selectedOption) return;
+          const isYesSelected = selectedOption.classList.contains('yes');
+          const isNoSelected = selectedOption.classList.contains('no');
+
+          if (headingText.includes('18 and 65') && !isYesSelected) {
+            isEligible = false;
+            reasons.push('Age must be between 18 and 65 years.');
+          }
+          if (headingText.includes('50 kg') && !isYesSelected) {
+            isEligible = false;
+            reasons.push('Weight must be at least 50 kg.');
+          }
+          if (headingText.includes('good health') && !isYesSelected) {
+            isEligible = false;
+            reasons.push('You must be in generally good health on the day of donation.');
+          }
+          if (headingText.includes('hemoglobin') && !isYesSelected) {
+            isEligible = false;
+            reasons.push('Hemoglobin level must be above 12.5 g/dL.');
+          }
+          if (headingText.includes('surgery') && isYesSelected) {
+            isEligible = false;
+            reasons.push('Major surgery requires a recovery deferral period of 6 months.');
+          }
+          if (headingText.includes('pregnant') && isYesSelected) {
+            isEligible = false;
+            reasons.push('Donation is deferred during pregnancy and breastfeeding periods.');
+          }
+          if (headingText.includes('antibiotics') && isYesSelected) {
+            isEligible = false;
+            reasons.push('Must be clear of antibiotic courses for at least 7 days.');
+          }
+        });
+
+        // Update the final UI based on pass/fail conditions
+        const iconEl = document.getElementById('resultIcon');
+        const titleEl = document.getElementById('resultTitle');
+        const textEl = document.getElementById('resultText');
+        const actionsEl = document.getElementById('resultActions');
+
+        if (isEligible) {
+          if (iconEl) iconEl.textContent = '✅';
+          if (titleEl) {
+            titleEl.textContent = 'You Appear to Be Eligible!';
+            titleEl.style.color = 'var(--success, #28a745)';
+          }
+          if (textEl) {
+            textEl.textContent = 'Based on your answers, you may be eligible to donate blood. Final eligibility will be confirmed during the medical screening at the donation center.';
+          }
+          if (actionsEl) {
+            actionsEl.style.display = 'flex';
+          }
+        } else {
+          if (iconEl) iconEl.textContent = '❌';
+          if (titleEl) {
+            titleEl.textContent = 'Temporary Deferral Notice';
+            titleEl.style.color = 'var(--danger, #dc3545)';
+          }
+          if (textEl) {
+            textEl.innerHTML = `<strong>You are currently not eligible to donate due to the following reason(s):</strong><br><ul style="text-align:left; margin-top:10px; padding-left:20px;">${reasons.map(r => `<li>${r}</li>`).join('')}</ul>`;
+          }
+          if (actionsEl) {
+            actionsEl.style.display = 'none'; // Hide registration link if explicitly ineligible
+          }
+        }
+      }
+    });
+  </script>
+  <script src="../script.js"></script>
+</body>
+</html>

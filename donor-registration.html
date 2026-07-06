@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register as a blood donor">
+  <title>Donor Registration - TN Blood Bank</title>
+  <link rel="stylesheet" href="../style.css">
+  <link class="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
+</head>
+<body>
+  <!-- Header Component - Included via JS -->
+<header class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <button class="header-icon-btn menu-btn" aria-label="Menu">☰</button>
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+        <div class="header-logo">🛡️</div>
+        <div class="header-title-group">
+          <span class="header-title">TN Blood Bank</span>
+          <span class="header-subtitle">Dept. of Health & Family Welfare, Govt. of TN</span>
+        </div>
+      </a>
+    </div>
+    <div class="header-right">
+      <button class="header-icon-btn" aria-label="Notifications">🔔<span class="badge">3</span></button>
+      <a href="donor-profile.html" class="header-icon-btn" aria-label="Profile">👤</a>
+    </div>
+  </div>
+</header>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <div class="side-nav-overlay"></div>
+<nav class="side-nav">
+  <div class="side-nav-header">
+    <div class="header-logo">🛡️</div>
+    <div class="side-nav-header-text">
+      <h3>TN Blood Bank</h3>
+      <p>Government of Tamil Nadu</p>
+    </div>
+    <button class="side-nav-close" aria-label="Close">✕</button>
+  </div>
+  <div class="side-nav-menu">
+    <a href="../index.html" class="side-nav-item"><span class="nav-icon">🏠</span> Home</a>
+    <a href="blood-availability.html" class="side-nav-item"><span class="nav-icon">🔍</span> Blood Availability</a>
+    <a href="blood-request.html" class="side-nav-item"><span class="nav-icon">📋</span> Blood Request</a>
+    <a href="donor-registration.html" class="side-nav-item active"><span class="nav-icon">✍️</span> Donor Registration</a>
+    <a href="emergency-request.html" class="side-nav-item"><span class="nav-icon">🚨</span> Emergency Request</a>
+    <div class="side-nav-divider"></div>
+    <a href="blood-camps.html" class="side-nav-item"><span class="nav-icon">⛺</span> Donation Camps</a>
+    <a href="donor-profile.html" class="side-nav-item"><span class="nav-icon">👤</span> Donor Profile</a>
+    <a href="eligibility-checker.html" class="side-nav-item"><span class="nav-icon">✅</span> Eligibility Checker</a>
+    <div class="side-nav-divider"></div>
+    <a href="hospital-login.html" class="side-nav-item"><span class="nav-icon">🏥</span> Hospital Login</a>
+    <a href="bloodbank-login.html" class="side-nav-item"><span class="nav-icon">🩸</span> Blood Bank Login</a>
+    <a href="admin-dashboard.html" class="side-nav-item"><span class="nav-icon">📊</span> Admin Dashboard</a>
+    <div class="side-nav-divider"></div>
+    <a href="feedback.html" class="side-nav-item"><span class="nav-icon">💬</span> Feedback & Support</a>
+  </div>
+</nav>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  
+<section class="page-header">
+  <div class="container">
+    <a href="../index.html" class="page-header-back">←</a>
+    <h1>✍️ Donor Registration</h1>
+    <p>Register as a blood donor and save lives</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:640px">
+    <div class="alert alert-success">
+      <span class="alert-icon">✅</span>
+      <span>By registering, you join 52,000+ donors across Tamil Nadu. Your one donation can save up to 3 lives!</span>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <form id="donorRegForm">
+          <h3 style="margin-bottom:var(--spacing-3)">Personal Information</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+            <div class="form-group">
+              <label class="form-label">First Name *</label>
+              <input type="text" class="form-input" placeholder="First name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name *</label>
+              <input type="text" class="form-input" placeholder="Last name" required>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+            <div class="form-group">
+              <label class="form-label">Date of Birth *</label>
+              <input type="date" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Gender *</label>
+              <select class="form-select" required>
+                <option value="">Select</option>
+                <option>Male</option><option>Female</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Blood Group *</label>
+            <select class="form-select" required>
+              <option value="">Select Blood Group</option>
+              <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+            </select>
+          </div>
+
+          <h3 style="margin:var(--spacing-3) 0 var(--spacing-3)">Contact Information</h3>
+          <div class="form-group">
+            <label class="form-label">Mobile Number *</label>
+            <input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="your.email@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Address *</label>
+            <textarea class="form-textarea" placeholder="Enter your full address" style="min-height:70px" required></textarea>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+            <div class="form-group">
+              <label class="form-label">District *</label>
+              <select class="form-select" required>
+                <option value="">Select</option>
+                <option>Chennai</option><option>Coimbatore</option><option>Madurai</option>
+                <option>Tiruchirappalli</option><option>Salem</option><option>Erode</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">PIN Code *</label>
+              <input type="text" class="form-input" placeholder="600001" required>
+            </div>
+          </div>
+
+          <h3 style="margin:var(--spacing-3) 0 var(--spacing-3)">Health Information</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+            <div class="form-group">
+              <label class="form-label">Weight (kg) *</label>
+              <input type="number" class="form-input" placeholder="55" min="50" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Donation Date</label>
+              <input type="date" class="form-input">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Any Medical Conditions?</label>
+            <textarea class="form-textarea" placeholder="List any medical conditions, medications, or allergies..." style="min-height:70px"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" required>
+              <span style="font-size:0.875rem">I agree to the terms and conditions and consent to being contacted for blood donation.</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox">
+              <span style="font-size:0.875rem">I want to receive notifications about blood donation camps in my area.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg">✍️ Register as Donor</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+  <div class="ai-assistant">
+  <div class="ai-assistant-chat">
+    <div class="ai-chat-header">
+      <h4>🤖 Health Assistant</h4>
+      <button class="ai-chat-close" style="color:var(--white)">✕</button>
+    </div>
+    <div class="ai-chat-messages">
+      <div class="ai-message bot">Hello! 👋 I'm your health assistant. How can I help you today?</div>
+    </div>
+    <div class="ai-chat-input">
+      <input type="text" placeholder="Ask me anything...">
+      <button>Send</button>
+    </div>
+  </div>
+  <button class="ai-assistant-btn" aria-label="AI Assistant">🤖</button>
+  <span class="ai-assistant-label">Ask Health Assistant</span>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <nav class="bottom-nav">
+  <a href="../index.html" class="bottom-nav-item"><span class="nav-icon">🏠</span><span>Home</span></a>
+  <a href="blood-availability.html" class="bottom-nav-item"><span class="nav-icon">🔍</span><span>Search</span></a>
+  <a href="donor-registration.html" class="bottom-nav-item donate-btn"><span class="nav-icon-wrap">🩸</span><span>Donate</span></a>
+  <a href="blood-request.html" class="bottom-nav-item"><span class="nav-icon">📋</span><span>Requests</span></a>
+  <a href="donor-profile.html" class="bottom-nav-item"><span class="nav-icon">👤</span><span>Profile</span></a>
+</nav>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

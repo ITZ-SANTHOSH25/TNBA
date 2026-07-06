@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hospital portal login">
+  <title>Hospital Login - TN Blood Bank</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
+</head>
+<body>
+  <!-- Header Component - Included via JS -->
+<header class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <button class="header-icon-btn menu-btn" aria-label="Menu">☰</button>
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+        <div class="header-logo">🛡️</div>
+        <div class="header-title-group">
+          <span class="header-title">TN Blood Bank</span>
+          <span class="header-subtitle">Dept. of Health & Family Welfare, Govt. of TN</span>
+        </div>
+      </a>
+    </div>
+    <div class="header-right">
+      <button class="header-icon-btn" aria-label="Notifications">🔔<span class="badge">3</span></button>
+      <a href="donor-profile.html" class="header-icon-btn" aria-label="Profile">👤</a>
+    </div>
+  </div>
+</header>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <div class="side-nav-overlay"></div>
+<nav class="side-nav">
+  <div class="side-nav-header">
+    <div class="header-logo">🛡️</div>
+    <div class="side-nav-header-text">
+      <h3>TN Blood Bank</h3>
+      <p>Government of Tamil Nadu</p>
+    </div>
+    <button class="side-nav-close" aria-label="Close">✕</button>
+  </div>
+  <div class="side-nav-menu">
+    <a href="../index.html" class="side-nav-item"><span class="nav-icon">🏠</span> Home</a>
+    <a href="blood-availability.html" class="side-nav-item"><span class="nav-icon">🔍</span> Blood Availability</a>
+    <a href="blood-request.html" class="side-nav-item"><span class="nav-icon">📋</span> Blood Request</a>
+    <a href="donor-registration.html" class="side-nav-item"><span class="nav-icon">✍️</span> Donor Registration</a>
+    <a href="emergency-request.html" class="side-nav-item"><span class="nav-icon">🚨</span> Emergency Request</a>
+    <div class="side-nav-divider"></div>
+    <a href="blood-camps.html" class="side-nav-item"><span class="nav-icon">⛺</span> Donation Camps</a>
+    <a href="donor-profile.html" class="side-nav-item"><span class="nav-icon">👤</span> Donor Profile</a>
+    <a href="eligibility-checker.html" class="side-nav-item"><span class="nav-icon">✅</span> Eligibility Checker</a>
+    <div class="side-nav-divider"></div>
+    <a href="hospital-login.html" class="side-nav-item active"><span class="nav-icon">🏥</span> Hospital Login</a>
+    <a href="bloodbank-login.html" class="side-nav-item"><span class="nav-icon">🩸</span> Blood Bank Login</a>
+    <a href="admin-dashboard.html" class="side-nav-item"><span class="nav-icon">📊</span> Admin Dashboard</a>
+    <div class="side-nav-divider"></div>
+    <a href="feedback.html" class="side-nav-item"><span class="nav-icon">💬</span> Feedback & Support</a>
+  </div>
+</nav>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  
+<section class="page-header">
+  <div class="container">
+    <a href="../index.html" class="page-header-back">←</a>
+    <h1>🏥 Hospital Login</h1>
+    <p>Access the hospital portal for blood bank services</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="login-container" style="padding-top:var(--spacing-3)">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-icon">🏥</div>
+        <h2>Hospital Portal</h2>
+        <p>Access blood bank services for your hospital</p>
+      </div>
+      <div class="login-body">
+        <form id="hospitalLoginForm">
+          <div class="form-group">
+            <label class="form-label">Hospital ID / Registration Number</label>
+            <input type="text" class="form-input" placeholder="Enter Hospital ID" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div style="display:flex;gap:8px">
+              <input type="password" class="form-input" placeholder="Enter password" required style="flex:1">
+              <button type="button" class="password-toggle btn-icon" style="background:var(--gray-100)">👁️</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox">
+              <span style="font-size:0.875rem">Remember me</span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg">🔐 Login</button>
+        </form>
+      </div>
+      <div class="login-footer">
+        <p>Forgot password? <a href="#">Reset here</a></p>
+        <p style="margin-top:8px">Don't have an account? <a href="#">Register Hospital</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+  <div class="ai-assistant">
+  <div class="ai-assistant-chat">
+    <div class="ai-chat-header">
+      <h4>🤖 Health Assistant</h4>
+      <button class="ai-chat-close" style="color:var(--white)">✕</button>
+    </div>
+    <div class="ai-chat-messages">
+      <div class="ai-message bot">Hello! 👋 I'm your health assistant. How can I help you today?</div>
+    </div>
+    <div class="ai-chat-input">
+      <input type="text" placeholder="Ask me anything...">
+      <button>Send</button>
+    </div>
+  </div>
+  <button class="ai-assistant-btn" aria-label="AI Assistant">🤖</button>
+  <span class="ai-assistant-label">Ask Health Assistant</span>
+</div>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <nav class="bottom-nav">
+  <a href="../index.html" class="bottom-nav-item"><span class="nav-icon">🏠</span><span>Home</span></a>
+  <a href="blood-availability.html" class="bottom-nav-item"><span class="nav-icon">🔍</span><span>Search</span></a>
+  <a href="donor-registration.html" class="bottom-nav-item donate-btn"><span class="nav-icon-wrap">🩸</span><span>Donate</span></a>
+  <a href="blood-request.html" class="bottom-nav-item"><span class="nav-icon">📋</span><span>Requests</span></a>
+  <a href="donor-profile.html" class="bottom-nav-item"><span class="nav-icon">👤</span><span>Profile</span></a>
+</nav>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>
