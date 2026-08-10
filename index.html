@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tamil Nadu Blood Bank Management System - Donate blood, save lives">
+<title>Tamil Nadu Blood Bank Management System</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS Variables / Design System ===== */
+:root{
+  --primary:#C81E1E;--primary-dark:#A01818;--primary-bg:#FDEAEA;
+  --success:#16A34A;--success-bg:#DCFCE7;
+  --danger:#DC2626;--danger-bg:#FEE2E2;
+  --warning:#F59E0B;--warning-bg:#FEF3C7;
+  --info:#2563EB;--info-bg:#DBEAFE;
+  --white:#FFFFFF;--black:#111827;
+  --gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-300:#D1D5DB;
+  --gray-400:#9CA3AF;--gray-500:#6B7280;--gray-600:#4B5563;--gray-700:#374151;--gray-800:#1F2937;
+  --radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:24px;
+  --spacing-1:4px;--spacing-2:8px;--spacing-3:16px;--spacing-4:24px;--spacing-5:32px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.06);--shadow:0 2px 8px rgba(0,0,0,.08);--shadow-md:0 4px 16px rgba(0,0,0,.10);--shadow-lg:0 10px 30px rgba(0,0,0,.15);
+  --font:'Poppins',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--gray-50);color:var(--gray-800);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--primary);text-decoration:none}
+img{max-width:100%}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--spacing-3)}
+.section{padding:var(--spacing-4) 0}
+.section-title{text-align:center;margin-bottom:var(--spacing-4)}
+.section-title h2{font-size:1.5rem;font-weight:700;color:var(--gray-800)}
+.section-title p{color:var(--gray-500);margin-top:4px}
+
+/* ===== Header ===== */
+.header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--gray-200);box-shadow:var(--shadow-sm)}
+.header-content{display:flex;align-items:center;justify-content:space-between;padding:10px var(--spacing-3);max-width:1400px;margin:0 auto}
+.header-left{display:flex;align-items:center;gap:10px}
+.header-logo{width:42px;height:42px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.header-title-group{display:flex;flex-direction:column}
+.header-title{font-size:1.063rem;font-weight:700;color:var(--gray-800);line-height:1.2}
+.header-subtitle{font-size:0.688rem;color:var(--gray-500)}
+.header-right{display:flex;align-items:center;gap:8px}
+.header-icon-btn{width:40px;height:40px;border-radius:var(--radius-md);border:none;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:1.125rem;cursor:pointer;position:relative;color:var(--gray-700);text-decoration:none}
+.header-icon-btn:hover{background:var(--gray-200)}
+.badge{position:absolute;top:-2px;right:-2px;background:var(--danger);color:var(--white);font-size:.625rem;font-weight:600;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+/* ===== Side Navigation ===== */
+.side-nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;opacity:0;visibility:hidden;transition:.3s}
+.side-nav-overlay.active{opacity:1;visibility:visible}
+.side-nav{position:fixed;top:0;left:0;bottom:0;width:280px;max-width:85vw;background:var(--white);z-index:201;transform:translateX(-100%);transition:transform .3s ease;overflow-y:auto;box-shadow:var(--shadow-lg)}
+.side-nav.active{transform:translateX(0)}
+.side-nav-header{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--gray-200);position:sticky;top:0;background:var(--white)}
+.side-nav-header-text h3{font-size:1.063rem;font-weight:700}
+.side-nav-header-text p{font-size:.75rem;color:var(--gray-500)}
+.side-nav-close{margin-left:auto;background:var(--gray-100);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;color:var(--gray-600)}
+.side-nav-menu{padding:8px}
+.side-nav-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:var(--radius-md);color:var(--gray-700);font-weight:500;font-size:.938rem;margin-bottom:2px;cursor:pointer}
+.side-nav-item:hover{background:var(--gray-100)}
+.side-nav-item.active{background:var(--primary-bg);color:var(--primary);font-weight:600}
+.side-nav-item .nav-icon{font-size:1.125rem;width:24px;text-align:center}
+.side-nav-divider{height:1px;background:var(--gray-200);margin:8px 0}
+.side-nav-footer{padding:16px;border-top:1px solid var(--gray-200);font-size:.75rem;color:var(--gray-400);text-align:center}
+
+/* ===== Bottom Navigation ===== */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--gray-200);display:flex;justify-content:space-around;z-index:90;box-shadow:0 -2px 10px rgba(0,0,0,.05)}
+.bottom-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 12px;color:var(--gray-500);font-size:.688rem;font-weight:500;cursor:pointer;flex:1;text-decoration:none;position:relative}
+.bottom-nav-item:hover,.bottom-nav-item.active{color:var(--primary)}
+.nav-icon{font-size:1.25rem}
+.bottom-nav-item.donate-btn{flex:0 0 auto;padding:6px 16px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white)!important;border-radius:20px 20px 0 0;margin-top:-12px;box-shadow:var(--shadow-md)}
+.bottom-nav-item.donate-btn .nav-icon-wrap{font-size:1.25rem}
+
+/* ===== Page View (SPA) ===== */
+.page-view{display:none;min-height:100vh;padding-bottom:70px}
+.page-view.active{display:block}
+.page-view .section{padding:var(--spacing-4) 0}
+.page-view .container{max-width:1200px}
+
+/* ===== Page Header ===== */
+.page-header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:var(--white);padding:var(--spacing-4) 0;position:relative}
+.page-header h1{font-size:1.5rem;font-weight:700}
+.page-header p{opacity:.9;font-size:.875rem;margin-top:4px}
+.page-header-back{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:50%;color:var(--white);font-size:1.25rem;margin-bottom:var(--spacing-2);cursor:pointer;text-decoration:none}
+.page-header-back:hover{background:rgba(255,255,255,.3)}
+
+/* ===== Cards ===== */
+.card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden;margin-bottom:var(--spacing-3)}
+.card-body{padding:var(--spacing-3)}
+
+/* ===== Buttons ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 20px;border:none;border-radius:var(--radius-md);font-family:var(--font);font-size:.938rem;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none}
+.btn:hover{opacity:.9;transform:translateY(-1px)}
+.btn-primary{background:var(--primary);color:var(--white)}
+.btn-success{background:var(--success);color:var(--white)}
+.btn-danger{background:var(--danger);color:var(--white)}
+.btn-outline{background:transparent;border:1.5px solid var(--gray-300);color:var(--gray-700)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+.btn-block{width:100%}
+.btn-lg{padding:14px 28px;font-size:1rem}
+.btn-sm{padding:6px 14px;font-size:.813rem}
+.btn-icon{width:40px;height:40px;border-radius:var(--radius-md);border:none;cursor:pointer;font-size:1.125rem;display:flex;align-items:center;justify-content:center}
+
+/* ===== Forms ===== */
+.form-group{margin-bottom:var(--spacing-3)}
+.form-label{display:block;font-size:.875rem;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+.form-input,.form-select,.form-textarea{width:100%;padding:10px 14px;border:1.5px solid var(--gray-300);border-radius:var(--radius-md);font-family:var(--font);font-size:.938rem;color:var(--gray-800);background:var(--white);transition:.2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-bg)}
+.form-textarea{resize:vertical;min-height:90px}
+.form-checkbox{display:flex;align-items:flex-start;gap:8px;cursor:pointer}
+.form-checkbox input{margin-top:3px;width:18px;height:18px;cursor:pointer}
+
+/* ===== Alerts ===== */
+.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:var(--radius-md);margin-bottom:var(--spacing-3);font-size:.875rem}
+.alert-icon{font-size:1.125rem;flex-shrink:0}
+.alert-info{background:var(--info-bg);color:#1E40AF}
+.alert-success{background:var(--success-bg);color:#166534}
+.alert-warning{background:var(--warning-bg);color:#92400E}
+.alert-danger{background:var(--danger-bg);color:#991B1B}
+
+/* ===== Chips ===== */
+.chip{padding:6px 16px;border:1.5px solid var(--gray-300);border-radius:20px;background:var(--white);font-size:.813rem;font-weight:500;color:var(--gray-600);cursor:pointer;transition:.2s}
+.chip:hover,.chip.active{background:var(--primary);color:var(--white);border-color:var(--primary)}
+
+/* ===== Home / Hero ===== */
+.hero{background:linear-gradient(135deg,var(--primary) 0%,#7C0A0A 100%);color:var(--white);text-align:center;padding:var(--spacing-5) var(--spacing-3)}
+.hero h1{font-size:2rem;font-weight:700;margin-bottom:var(--spacing-2)}
+.hero p{font-size:1.063rem;opacity:.92;margin-bottom:var(--spacing-3)}
+.hero-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--spacing-2);margin-top:var(--spacing-4)}
+.hero-stat{text-align:center;background:rgba(255,255,255,.15);border-radius:var(--radius-md);padding:var(--spacing-2)}
+.hero-stat .num{font-size:1.5rem;font-weight:700}
+.hero-stat .lbl{font-size:.75rem;opacity:.9}
+.quick-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--spacing-2);padding:var(--spacing-3) 0}
+.quick-action{background:var(--white);border-radius:var(--radius-lg);padding:var(--spacing-3);text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:.2s;border:none;font-family:var(--font)}
+.quick-action:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.quick-action .qa-icon{font-size:2rem;margin-bottom:6px}
+.quick-action .qa-title{font-size:.875rem;font-weight:600;color:var(--gray-700)}
+.announcement-card{background:var(--white);border-radius:var(--radius-lg);padding:var(--spacing-3);box-shadow:var(--shadow);margin-bottom:var(--spacing-3);border-left:4px solid var(--warning)}
+.announcement-card h3{font-size:1rem}
+.announcement-card p{font-size:.813rem;color:var(--gray-600)}
+.health-tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--spacing-2)}
+.tip-item{display:flex;align-items:center;gap:10px;padding:12px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
+.tip-item .tip-emoji{font-size:1.5rem}
+.tip-item span:last-child{font-size:.875rem;color:var(--gray-700)}
+
+/* ===== Search Filter Bar ===== */
+.search-filter-bar{background:var(--white);border-radius:var(--radius-lg);padding:var(--spacing-3);box-shadow:var(--shadow);margin-bottom:var(--spacing-3)}
+.search-filter-row{display:flex;flex-wrap:wrap;gap:var(--spacing-2);align-items:flex-end}
+.search-filter-row .form-group{flex:1;min-width:140px;margin-bottom:0}
+
+/* ===== Blood Bank Cards ===== */
+.availability-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--spacing-3)}
+.blood-bank-card{background:var(--white);border-radius:var(--radius-lg);padding:var(--spacing-3);box-shadow:var(--shadow);margin-bottom:var(--spacing-3)}
+.blood-bank-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.blood-bank-card-header h4{font-size:1rem;font-weight:600}
+.distance{font-size:.75rem;color:var(--gray-500);white-space:nowrap}
+.address{font-size:.813rem;color:var(--gray-600);margin-bottom:var(--spacing-2)}
+.blood-units-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:var(--spacing-2)}
+.blood-unit{border-radius:var(--radius-sm);padding:8px 4px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.blood-unit .type{font-size:.75rem;font-weight:700}
+.blood-unit .count{font-size:1.125rem;font-weight:700}
+.blood-unit.available{background:var(--success-bg);color:var(--success)}
+.blood-unit.limited{background:var(--warning-bg);color:var(--warning)}
+.blood-unit.unavailable{background:var(--gray-100);color:var(--gray-400)}
+
+/* ===== Camp Cards ===== */
+.camp-card{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.camp-card-banner{height:90px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:rgba(255,255,255,.3);position:relative}
+.camp-date-badge{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.9);color:var(--gray-800);font-size:.688rem;font-weight:600;padding:4px 10px;border-radius:20px}
+.camp-card-body{padding:var(--spacing-2)}
+.camp-card-body h4{font-size:.938rem;font-weight:600;margin-bottom:4px}
+.camp-card-body p{font-size:.75rem;color:var(--gray-600);margin-bottom:2px}
+.camp-card-footer{padding:var(--spacing-2);border-top:1px solid var(--gray-200);display:flex;justify-content:space-between;align-items:center}
+.camp-status{font-size:.688rem;font-weight:600;padding:3px 10px;border-radius:20px}
+.camp-status.ongoing{background:var(--success-bg);color:var(--success)}
+.camp-status.upcoming{background:var(--info-bg);color:var(--info)}
+.camp-status.completed{background:var(--gray-100);color:var(--gray-500)}
+
+/* ===== Profile ===== */
+.profile-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);text-align:center;padding:var(--spacing-4) var(--spacing-3)}
+.profile-avatar{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto var(--spacing-2)}
+.profile-header h2{font-size:1.25rem;font-weight:700}
+.profile-header p{font-size:.875rem;opacity:.9}
+.profile-stats{display:flex;justify-content:center;gap:var(--spacing-4);margin-top:var(--spacing-2)}
+.profile-stat .value{font-size:1.5rem;font-weight:700}
+.profile-stat .label{font-size:.75rem;opacity:.85}
+.profile-menu-item{display:flex;align-items:center;gap:12px;padding:12px;border-bottom:1px solid var(--gray-100);cursor:pointer}
+.profile-menu-item:last-child{border-bottom:none}
+.profile-menu-item:hover{background:var(--gray-50)}
+.profile-accordion .accordion-trigger{transition:background .2s}
+.profile-accordion.open .accordion-trigger{background:var(--gray-50)}
+.profile-accordion.open .menu-arrow{transform:rotate(90deg)}
+.menu-arrow{transition:transform .3s ease;display:inline-block}
+.accordion-content{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.profile-accordion.open .accordion-content{max-height:1200px}
+.info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:.9rem}
+.info-row:last-of-type{border-bottom:none}
+.info-label{color:var(--gray-500)}
+.info-value{font-weight:500;color:var(--gray-800)}
+.switch{position:relative;display:inline-block;width:44px;height:24px}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:var(--gray-300);border-radius:24px;transition:.3s}
+.slider:before{content:"";position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
+.switch input:checked + .slider{background:var(--success)}
+.switch input:checked + .slider:before{transform:translateX(20px)}
+.menu-icon{width:40px;height:40px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.125rem;flex-shrink:0}
+.menu-text h5{font-size:.938rem;font-weight:600}
+.menu-text p{font-size:.75rem;color:var(--gray-500)}
+.menu-arrow{font-size:1.25rem;color:var(--gray-400);margin-left:auto}
+.history-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--gray-100)}
+.history-item:last-child{border-bottom:none}
+.history-date{text-align:center;flex-shrink:0;width:50px}
+.history-date .day{font-size:1.25rem;font-weight:700;color:var(--primary)}
+.history-date .month{font-size:.688rem;color:var(--gray-500);text-transform:uppercase}
+.history-details h5{font-size:.875rem;font-weight:600}
+.history-details p{font-size:.75rem;color:var(--gray-600)}
+
+/* ===== Eligibility Checker ===== */
+.eligibility-checker{padding:var(--spacing-2)}
+.step-indicator{display:flex;justify-content:center;gap:8px;margin-bottom:var(--spacing-3)}
+.step-dot{width:12px;height:12px;border-radius:50%;background:var(--gray-300);transition:.3s}
+.step-dot.active{background:var(--primary);transform:scale(1.2)}
+.eligibility-step{display:none}
+.eligibility-step.active{display:block}
+.eligibility-question{margin-bottom:var(--spacing-3)}
+.eligibility-question h4{font-size:1rem;font-weight:600;margin-bottom:var(--spacing-2)}
+.question-options{display:flex;gap:12px;flex-wrap:wrap}
+.question-option{flex:1;min-width:120px;padding:12px;border:2px solid var(--gray-200);border-radius:var(--radius-md);text-align:center;font-weight:600;font-size:.938rem;cursor:pointer;transition:.2s;background:var(--white)}
+.question-option:hover{border-color:var(--primary)}
+.question-option.selected{background:var(--primary-bg);border-color:var(--primary);color:var(--primary)}
+.question-option.yes.selected{background:var(--success-bg);border-color:var(--success);color:var(--success)}
+.question-option.no.selected{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.eligibility-result{text-align:center;padding:var(--spacing-3)}
+.result-icon{font-size:3rem;margin-bottom:var(--spacing-2)}
+.eligibility-criteria .eligibility-item{display:flex;align-items:center;gap:8px;padding:8px 0;font-size:.875rem;color:var(--gray-600)}
+.eligibility-criteria .check-icon{font-size:1rem}
+
+/* ===== Login ===== */
+.login-container{display:flex;justify-content:center;min-height:60vh}
+.login-card{max-width:420px;width:100%;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden}
+.login-header{text-align:center;padding:var(--spacing-4);background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white)}
+.login-icon{font-size:2.5rem;margin-bottom:8px}
+.login-header h2{font-size:1.25rem;font-weight:700}
+.login-header p{font-size:.813rem;opacity:.9}
+.login-body{padding:var(--spacing-3)}
+.login-footer{padding:var(--spacing-2) var(--spacing-3) var(--spacing-3);text-align:center;font-size:.813rem;color:var(--gray-600)}
+.password-toggle{flex-shrink:0}
+
+/* ===== Emergency ===== */
+.emergency-alert-banner{background:linear-gradient(135deg,var(--danger),#7C0A0A);border-radius:var(--radius-lg);padding:var(--spacing-3);text-align:center;margin-bottom:var(--spacing-3)}
+.pulse{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.emergency-form{background:var(--white);border-radius:var(--radius-lg);padding:var(--spacing-3);box-shadow:var(--shadow);margin-bottom:var(--spacing-3)}
+.emergency-contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--spacing-2)}
+.emergency-contact-card{display:flex;align-items:center;gap:12px;padding:12px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
+.contact-icon{width:44px;height:44px;border-radius:var(--radius-md);background:var(--primary-bg);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+.contact-info h5{font-size:.875rem;font-weight:600}
+.contact-info p{font-size:.813rem;color:var(--gray-600)}
+
+/* ===== Admin Dashboard ===== */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--spacing-3);margin:var(--spacing-3) 0}
+.stat-card{background:var(--white);border-radius:var(--radius-lg);padding:var(--spacing-3);text-align:center;box-shadow:var(--shadow)}
+.stat-icon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto var(--spacing-2)}
+.stat-icon.red{background:var(--danger-bg);color:var(--danger)}
+.stat-icon.green{background:var(--success-bg);color:var(--success)}
+.stat-icon.blue{background:var(--info-bg);color:var(--info)}
+.stat-icon.orange{background:var(--warning-bg);color:var(--warning)}
+.stat-number{font-size:1.75rem;font-weight:700;color:var(--gray-800)}
+.stat-label{font-size:.813rem;color:var(--gray-500)}
+.tabs{display:flex;gap:4px;border-bottom:2px solid var(--gray-200);margin-bottom:var(--spacing-3);flex-wrap:wrap}
+.tab{padding:10px 20px;border:none;background:transparent;font-family:var(--font);font-size:.938rem;font-weight:600;color:var(--gray-500);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px}
+.tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--spacing-3)}
+.dashboard-card{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden}
+.dashboard-card-header{display:flex;justify-content:space-between;align-items:center;padding:var(--spacing-2) var(--spacing-3);border-bottom:1px solid var(--gray-100)}
+.dashboard-card-header h4{font-size:.938rem;font-weight:600}
+.card-action{font-size:.75rem;color:var(--primary);font-weight:600;cursor:pointer}
+.dashboard-card .dashboard-card-header+*{padding:var(--spacing-3)}
+.table-responsive{overflow-x:auto}
+.data-table{width:100%;border-collapse:collapse;font-size:.813rem}
+.data-table th{text-align:left;padding:8px 12px;background:var(--gray-50);color:var(--gray-600);font-weight:600;border-bottom:1px solid var(--gray-200)}
+.data-table td{padding:8px 12px;border-bottom:1px solid var(--gray-100)}
+.blood-type{padding:2px 8px;border-radius:var(--radius-sm);font-size:.75rem;font-weight:600;color:var(--white)}
+.blood-type.apos{background:#DC2626}.blood-type.aneg{background:#991B1B}
+.blood-type.bpos{background:#2563EB}.blood-type.bneg{background:#1E40AF}
+.blood-type.abpos{background:#7C3AED}.blood-type.abneg{background:#5B21B6}
+.blood-type.opos{background:#16A34A}.blood-type.oneg{background:#166534}
+.status-available{color:var(--success);font-weight:600}
+.status-limited{color:var(--warning);font-weight:600}
+.progress{height:8px;background:var(--gray-100);border-radius:4px;overflow:hidden}
+.progress-bar{height:100%;background:var(--primary);border-radius:4px;transition:width .8s}
+.progress-bar.success{background:var(--success)}
+.progress-bar.warning{background:var(--warning)}
+
+/* ===== Feedback ===== */
+.feedback-options{display:flex;justify-content:center;gap:var(--spacing-3);flex-wrap:wrap}
+.feedback-option{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;border-radius:var(--radius-md);cursor:pointer;transition:.2px;border:2px solid transparent}
+.feedback-option:hover{background:var(--gray-50)}
+.feedback-option.selected{border-color:var(--primary);background:var(--primary-bg)}
+.feedback-option .emoji{font-size:2rem}
+.feedback-option .label{font-size:.75rem;font-weight:600;color:var(--gray-700)}
+.faq-item{border-bottom:1px solid var(--gray-200);padding:12px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-question{font-size:.938rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--gray-800)}
+.faq-toggle{font-size:.875rem;transition:transform .2s}
+.faq-item.open .faq-toggle{transform:rotate(180deg)}
+.faq-answer{font-size:.813rem;color:var(--gray-600);padding-top:8px;display:none}
+.faq-item.open .faq-answer{display:block}
+
+/* ===== AI Assistant ===== */
+.ai-assistant{position:fixed;bottom:80px;right:16px;z-index:95}
+.ai-assistant-btn{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);border:none;font-size:1.5rem;cursor:pointer;box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:center;transition:.2s}
+.ai-assistant-btn:hover{transform:scale(1.08)}
+.ai-assistant-label{position:absolute;right:64px;top:50%;transform:translateY(-50%);background:var(--gray-800);color:var(--white);font-size:.75rem;padding:4px 10px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;transition:.2s}
+.ai-assistant:hover .ai-assistant-label{opacity:1}
+.ai-assistant-chat{position:absolute;bottom:70px;right:0;width:320px;max-width:85vw;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(10px) scale(.95);transition:.25s}
+.ai-assistant-chat.active{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.ai-chat-header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.ai-chat-header h4{font-size:.938rem;font-weight:600}
+.ai-chat-close{background:rgba(255,255,255,.2);border:none;color:var(--white);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.875rem}
+.ai-chat-messages{padding:16px;max-height:300px;overflow-y:auto}
+.ai-message{padding:10px 14px;border-radius:var(--radius-md);margin-bottom:8px;max-width:85%;font-size:.875rem}
+.ai-message.bot{background:var(--gray-100);color:var(--gray-800);align-self:flex-start}
+.ai-message.user{background:var(--primary);color:var(--white);margin-left:auto}
+.ai-chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--gray-200)}
+.ai-chat-input input{flex:1;padding:8px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-md);font-family:var(--font);font-size:.875rem}
+.ai-chat-input input:focus{outline:none;border-color:var(--primary)}
+.ai-chat-input button{padding:8px 16px;background:var(--primary);color:var(--white);border:none;border-radius:var(--radius-md);cursor:pointer;font-weight:600;font-size:.875rem}
+
+/* ===== Toast ===== */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--gray-800);color:var(--white);padding:12px 24px;border-radius:var(--radius-md);font-size:.875rem;font-weight:500;z-index:300;opacity:0;transition:.3s;box-shadow:var(--shadow-lg);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== Responsive ===== */
+/* ===== Responsive: Mobile First (<769px) ===== */
+@media(max-width:768px){
+  .header-title{font-size:.938rem}
+  .header-subtitle{display:none}
+  .hero h1{font-size:1.5rem}
+  .blood-units-grid{grid-template-columns:repeat(4,1fr)}
+  .search-filter-row{flex-direction:column}
+  .search-filter-row .form-group{width:100%}
+  .hero-stat-row{grid-template-columns:repeat(2,1fr)}
+  .quick-actions{grid-template-columns:repeat(2,1fr)}
+  .health-tips{grid-template-columns:1fr}
+  .availability-results{grid-template-columns:1fr}
+  .emergency-contacts{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .dashboard-grid{grid-template-columns:1fr}
+  .form-row{flex-direction:column}
+  .form-row .form-group{width:100%}
+  .login-wrapper{padding:var(--spacing-3)}
+  .ai-assistant-chat{width:calc(100vw - 32px);right:-8px}
+  .toast{bottom:90px}
+  .admin-tabs{flex-wrap:wrap}
+  .admin-tab{flex:1 1 auto;text-align:center}
+  .tabs{flex-wrap:wrap}
+  .tab{flex:1 1 auto;text-align:center;padding:8px 12px;font-size:.875rem}
+  /* Force inline grid forms to single column on mobile */
+  .card-body [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  .card-body [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+}
+
+/* ===== Responsive: Tablet (769px–1023px) ===== */
+@media(min-width:769px) and (max-width:1023px){
+  .bottom-nav{display:none}
+  .page-view{padding-bottom:var(--spacing-4)}
+  .hero-stat-row{grid-template-columns:repeat(4,1fr)}
+  .quick-actions{grid-template-columns:repeat(4,1fr)}
+  .health-tips{grid-template-columns:repeat(3,1fr)}
+  .availability-results{grid-template-columns:repeat(2,1fr)}
+  .emergency-contacts{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+  .dashboard-grid{grid-template-columns:repeat(2,1fr)}
+  .form-row{flex-direction:row}
+}
+
+/* ===== Responsive: Desktop (≥1024px) — Persistent Sidebar Layout ===== */
+@media(min-width:1024px){
+  /* Persistent sidebar */
+  .side-nav{
+    transform:translateX(0);
+    box-shadow:none;
+    border-right:1px solid var(--gray-200);
+    width:260px;
+    z-index:50;
+  }
+  .side-nav-overlay{display:none!important}
+  .side-nav-close{display:none}
+  .menu-btn{display:none}
+
+  /* Offset main content for sidebar */
+  .header{margin-left:260px}
+  .header-content{max-width:1100px}
+  .page-view{margin-left:260px;padding-bottom:var(--spacing-5)}
+  .bottom-nav{display:none}
+  .ai-assistant-widget{right:24px}
+
+  /* Wider multi-column grids on desktop */
+  .hero h1{font-size:2.5rem}
+  .hero-stat-row{grid-template-columns:repeat(4,1fr);max-width:900px;margin-left:auto;margin-right:auto}
+  .quick-actions{grid-template-columns:repeat(4,1fr)}
+  .health-tips{grid-template-columns:repeat(4,1fr)}
+  .availability-results{grid-template-columns:repeat(3,1fr)}
+  .emergency-contacts{grid-template-columns:repeat(3,1fr)}
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+  .dashboard-grid{grid-template-columns:repeat(2,1fr)}
+  .form-row{flex-direction:row}
+  .toast{bottom:24px}
+  .admin-tabs{flex-wrap:nowrap}
+  .tabs{flex-wrap:nowrap}
+}
+
+/* ===== Responsive: Large Desktop (≥1440px) ===== */
+@media(min-width:1440px){
+  .side-nav{width:280px}
+  .header{margin-left:280px}
+  .page-view{margin-left:280px}
+  .header-content{max-width:1200px}
+  .availability-results{grid-template-columns:repeat(4,1fr)}
+  .quick-actions{grid-template-columns:repeat(4,1fr)}
+  .health-tips{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+
+<!-- ===== Shared Header ===== -->
+<header class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <button class="header-icon-btn menu-btn" aria-label="Menu">☰</button>
+      <a data-nav="home" style="display:flex;align-items:center;gap:12px;cursor:pointer">
+        <div class="header-logo">🛡️</div>
+        <div class="header-title-group">
+          <span class="header-title">TN Blood Bank</span>
+          <span class="header-subtitle">Dept. of Health & Family Welfare, Govt. of TN</span>
+        </div>
+      </a>
+    </div>
+    <div class="header-right">
+      <button class="header-icon-btn" aria-label="Notifications">🔔<span class="badge">3</span></button>
+      <a class="header-icon-btn" data-nav="donor-profile" aria-label="Profile" style="cursor:pointer">👤</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Shared Side Navigation ===== -->
+<div class="side-nav-overlay"></div>
+<nav class="side-nav">
+  <div class="side-nav-header">
+    <div class="header-logo">🛡️</div>
+    <div class="side-nav-header-text">
+      <h3>TN Blood Bank</h3>
+      <p>Government of Tamil Nadu</p>
+    </div>
+    <button class="side-nav-close" aria-label="Close">✕</button>
+  </div>
+  <div class="side-nav-menu">
+    <a class="side-nav-item" data-nav="home"><span class="nav-icon">🏠</span> Home</a>
+    <a class="side-nav-item" data-nav="blood-availability"><span class="nav-icon">🔍</span> Blood Availability</a>
+    <a class="side-nav-item" data-nav="blood-request"><span class="nav-icon">📋</span> Blood Request</a>
+    <a class="side-nav-item" data-nav="donor-registration"><span class="nav-icon">✍️</span> Donor Registration</a>
+    <a class="side-nav-item" data-nav="emergency-request"><span class="nav-icon">🚨</span> Emergency Request</a>
+    <div class="side-nav-divider"></div>
+    <a class="side-nav-item" data-nav="blood-camps"><span class="nav-icon">⛺</span> Donation Camps</a>
+    <a class="side-nav-item" data-nav="donor-profile"><span class="nav-icon">👤</span> Donor Profile</a>
+    <a class="side-nav-item" data-nav="eligibility-checker"><span class="nav-icon">✅</span> Eligibility Checker</a>
+    <div class="side-nav-divider"></div>
+    <a class="side-nav-item" data-nav="hospital-login"><span class="nav-icon">🏥</span> Hospital Login</a>
+    <a class="side-nav-item" data-nav="bloodbank-login"><span class="nav-icon">🩸</span> Blood Bank Login</a>
+    <a class="side-nav-item" data-nav="admin-dashboard"><span class="nav-icon">📊</span> Admin Dashboard</a>
+    <div class="side-nav-divider"></div>
+    <a class="side-nav-item" data-nav="feedback"><span class="nav-icon">💬</span> Feedback & Support</a>
+  </div>
+</nav>
+
+<!-- ====================================================== -->
+<!-- ===================== PAGE: HOME ===================== -->
+<!-- ====================================================== -->
+<div class="page-view active" id="page-home">
+  <section class="hero">
+    <h1>Donate Blood, Save Lives</h1>
+    <p>One donation can save up to three lives.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-light" data-nav="donor-registration" style="background:var(--white);color:var(--primary)">🩸 Donate Now</button>
+      <button class="btn btn-outline" data-nav="blood-request" style="border-color:rgba(255,255,255,.6);color:var(--white)">📋 Request Blood</button>
+    </div>
+    <div class="hero-stat-row">
+      <div class="hero-stat"><div class="num">1,52,430</div><div class="lbl">Registered Donors</div></div>
+      <div class="hero-stat"><div class="num">168</div><div class="lbl">Blood Banks</div></div>
+      <div class="hero-stat"><div class="num">18,245</div><div class="lbl">Blood Units</div></div>
+      <div class="hero-stat"><div class="num">42</div><div class="lbl">Donation Camps</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title"><h2>Our Services</h2><p>Quick access to all blood bank services</p></div>
+      <div class="quick-actions">
+        <button class="quick-action" data-nav="blood-availability"><div class="qa-icon">🔍</div><div class="qa-title">Blood Search</div></button>
+        <button class="quick-action" data-nav="donor-registration"><div class="qa-icon">✍️</div><div class="qa-title">Register Donor</div></button>
+        <button class="quick-action" data-nav="blood-request"><div class="qa-icon">📋</div><div class="qa-title">Blood Request</div></button>
+        <button class="quick-action" data-nav="emergency-request"><div class="qa-icon">🚨</div><div class="qa-title">Emergency</div></button>
+        <button class="quick-action" data-nav="blood-camps"><div class="qa-icon">⛺</div><div class="qa-title">Donation Camps</div></button>
+        <button class="quick-action" data-nav="eligibility-checker"><div class="qa-icon">✅</div><div class="qa-title">Eligibility Check</div></button>
+        <button class="quick-action" data-nav="hospital-login"><div class="qa-icon">🏥</div><div class="qa-title">Hospital Login</div></button>
+        <button class="quick-action" data-nav="bloodbank-login"><div class="qa-icon">🩸</div><div class="qa-title">Blood Bank Login</div></button>
+        <button class="quick-action" data-nav="admin-dashboard"><div class="qa-icon">📊</div><div class="qa-title">Admin Dashboard</div></button>
+        <button class="quick-action" data-nav="donor-profile"><div class="qa-icon">👤</div><div class="qa-title">Donor Profile</div></button>
+        <button class="quick-action" data-nav="feedback"><div class="qa-icon">💬</div><div class="qa-title">Feedback</div></button>
+        <button class="quick-action" data-nav="blood-camps"><div class="qa-icon">📝</div><div class="qa-title">Camp Registration</div></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--danger-bg)">
+    <div class="container">
+      <div class="announcement-card" style="border-left-color:var(--danger)">
+        <h3>🚨 Emergency Blood Needed?</h3>
+        <p>Find blood instantly across Tamil Nadu. Our emergency request system processes critical needs within 30 minutes.</p>
+        <button class="btn btn-danger" data-nav="emergency-request" style="margin-top:10px">🚨 Find Blood Now</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title"><h2>Who Can Donate Blood?</h2><p>Check whether you are eligible before donating.</p></div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-primary btn-lg" data-nav="eligibility-checker">✅ Check Eligibility</button>
+        <button class="btn btn-outline btn-lg" data-nav="blood-camps">⛺ Nearby Camps</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title"><h2>Latest Announcements</h2></div>
+      <div class="announcement-card">
+        <h3>⛺ Blood Donation Camp</h3>
+        <p>📅 12 July 2026 | 📍 Chennai — Rajiv Gandhi Government Hospital, Egmore</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--gray-100)">
+    <div class="container">
+      <div class="section-title"><h2>Health Tips</h2></div>
+      <div class="health-tips">
+        <div class="tip-item"><span class="tip-emoji">💧</span><span>Drink plenty of water before donating.</span></div>
+        <div class="tip-item"><span class="tip-emoji">🥗</span><span>Eat a healthy meal beforehand.</span></div>
+        <div class="tip-item"><span class="tip-emoji">😴</span><span>Sleep well the night before.</span></div>
+        <div class="tip-item"><span class="tip-emoji">🧘</span><span>Rest for 10–15 minutes after donation.</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- ============ PAGE: BLOOD AVAILABILITY ================ -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-blood-availability">
+  <section class="page-header">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>🔍 Blood Availability Search</h1>
+      <p>Search for blood availability across Tamil Nadu blood banks</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="search-filter-bar">
+        <form id="bloodSearchForm">
+          <div class="search-filter-row">
+            <div class="form-group">
+              <label class="form-label">Blood Group</label>
+              <select class="form-select">
+                <option value="">Select Blood Group</option>
+                <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">District</label>
+              <select class="form-select">
+                <option value="">Select District</option>
+                <option>Chennai</option><option>Coimbatore</option><option>Madurai</option>
+                <option>Tiruchirappalli</option><option>Salem</option><option>Erode</option>
+                <option>Thanjavur</option><option>Vellore</option><option>Thoothukudi</option><option>Dindigul</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Component</label>
+              <select class="form-select">
+                <option value="">All Components</option>
+                <option>Whole Blood</option><option>Red Blood Cells</option>
+                <option>Platelets</option><option>Plasma</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:0">
+              <button type="submit" class="btn btn-primary">🔍 Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--spacing-3)">
+        <button class="chip blood-type-chip active" onclick="filterBloodType('All')">All</button>
+        <button class="chip blood-type-chip" onclick="filterBloodType('A+')">A+</button>
+        <button class="chip blood-type-chip" onclick="filterBloodType('A-')">A-</button>
+        <button class="chip blood-type-chip" onclick="filterBloodType('B+')">B+</button>
+        <button class="chip blood-type-chip" onclick="filterBloodType('B-')">B-</button>
+        <button class="chip blood-type-chip" onclick="filterBloodType('AB+')">AB+</button>
+        <button class="chip blood-type-chip" onclick="filterBloodType('AB-')">AB-</button>
+        <button class="chip blood-type-chip" onclick="filterBloodType('O+')">O+</button>
+        <button class="chip blood-type-chip" onclick="filterBloodType('O-')">O-</button>
+      </div>
+
+      <div class="availability-results" id="availabilityResults">
+        <div class="blood-bank-card">
+          <div class="blood-bank-card-header"><div><h4>Government General Hospital Blood Bank</h4><span style="font-size:.75rem;color:var(--success);font-weight:600">● Open Now</span></div><span class="distance">📍 2.5 km</span></div>
+          <p class="address">Chennai - Egmore, Tamil Nadu 600008</p>
+          <div class="blood-units-grid">
+            <div class="blood-unit available"><span class="type">A+</span><span class="count">45</span></div>
+            <div class="blood-unit available"><span class="type">B+</span><span class="count">32</span></div>
+            <div class="blood-unit limited"><span class="type">AB+</span><span class="count">8</span></div>
+            <div class="blood-unit available"><span class="type">O+</span><span class="count">56</span></div>
+            <div class="blood-unit limited"><span class="type">A-</span><span class="count">5</span></div>
+            <div class="blood-unit unavailable"><span class="type">B-</span><span class="count">0</span></div>
+            <div class="blood-unit limited"><span class="type">AB-</span><span class="count">3</span></div>
+            <div class="blood-unit available"><span class="type">O-</span><span class="count">12</span></div>
+          </div>
+          <div style="margin-top:var(--spacing-2);display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-primary" data-nav="blood-request">📋 Request Blood</button>
+            <button class="btn btn-sm btn-outline">📞 Contact</button>
+            <button class="btn btn-sm btn-outline">📍 Directions</button>
+          </div>
+        </div>
+        <div class="blood-bank-card">
+          <div class="blood-bank-card-header"><div><h4>Chennai Corporation Blood Bank</h4><span style="font-size:.75rem;color:var(--success);font-weight:600">● Open Now</span></div><span class="distance">📍 5.1 km</span></div>
+          <p class="address">Chennai - Nungambakkam, Tamil Nadu 600034</p>
+          <div class="blood-units-grid">
+            <div class="blood-unit available"><span class="type">A+</span><span class="count">28</span></div>
+            <div class="blood-unit available"><span class="type">B+</span><span class="count">41</span></div>
+            <div class="blood-unit available"><span class="type">AB+</span><span class="count">15</span></div>
+            <div class="blood-unit limited"><span class="type">O+</span><span class="count">9</span></div>
+            <div class="blood-unit unavailable"><span class="type">A-</span><span class="count">0</span></div>
+            <div class="blood-unit limited"><span class="type">B-</span><span class="count">4</span></div>
+            <div class="blood-unit unavailable"><span class="type">AB-</span><span class="count">0</span></div>
+            <div class="blood-unit limited"><span class="type">O-</span><span class="count">6</span></div>
+          </div>
+          <div style="margin-top:var(--spacing-2);display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-primary" data-nav="blood-request">📋 Request Blood</button>
+            <button class="btn btn-sm btn-outline">📞 Contact</button>
+            <button class="btn btn-sm btn-outline">📍 Directions</button>
+          </div>
+        </div>
+        <div class="blood-bank-card">
+          <div class="blood-bank-card-header"><div><h4>Stanley Medical College Blood Bank</h4><span style="font-size:.75rem;color:var(--warning);font-weight:600">◐ Closes at 5 PM</span></div><span class="distance">📍 7.8 km</span></div>
+          <p class="address">Chennai - Tondiarpet, Tamil Nadu 600001</p>
+          <div class="blood-units-grid">
+            <div class="blood-unit available"><span class="type">A+</span><span class="count">22</span></div>
+            <div class="blood-unit limited"><span class="type">B+</span><span class="count">7</span></div>
+            <div class="blood-unit available"><span class="type">AB+</span><span class="count">18</span></div>
+            <div class="blood-unit available"><span class="type">O+</span><span class="count">34</span></div>
+            <div class="blood-unit limited"><span class="type">A-</span><span class="count">6</span></div>
+            <div class="blood-unit available"><span class="type">B-</span><span class="count">11</span></div>
+            <div class="blood-unit limited"><span class="type">AB-</span><span class="count">2</span></div>
+            <div class="blood-unit unavailable"><span class="type">O-</span><span class="count">0</span></div>
+          </div>
+          <div style="margin-top:var(--spacing-2);display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-primary" data-nav="blood-request">📋 Request Blood</button>
+            <button class="btn btn-sm btn-outline">📞 Contact</button>
+            <button class="btn btn-sm btn-outline">📍 Directions</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- =============== PAGE: BLOOD REQUEST ================== -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-blood-request">
+  <section class="page-header">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>📋 Blood Request</h1>
+      <p>Submit a blood request for patients in need</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:640px">
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <span>Blood requests are processed within 2 hours. For emergency needs, use our <a data-nav="emergency-request" style="font-weight:700;cursor:pointer">Emergency Request</a> page.</span>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <form id="bloodRequestForm">
+            <h3 style="margin-bottom:var(--spacing-3)">Patient Information</h3>
+            <div class="form-group">
+              <label class="form-label">Patient Name *</label>
+              <input type="text" class="form-input" placeholder="Enter patient's full name" required>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+              <div class="form-group">
+                <label class="form-label">Blood Group Required *</label>
+                <select class="form-select" required>
+                  <option value="">Select</option>
+                  <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                  <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Units Required *</label>
+                <input type="number" class="form-input" placeholder="1" min="1" max="10" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Component Type</label>
+              <select class="form-select"><option>Whole Blood</option><option>Red Blood Cells</option><option>Platelets</option><option>Plasma</option></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hospital Name *</label>
+              <input type="text" class="form-input" placeholder="Enter hospital name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hospital Address *</label>
+              <input type="text" class="form-input" placeholder="Enter hospital address" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Doctor's Name *</label>
+              <input type="text" class="form-input" placeholder="Enter attending doctor's name" required>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+              <div class="form-group">
+                <label class="form-label">Contact Number *</label>
+                <input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Required Date *</label>
+                <input type="date" class="form-input" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Additional Notes</label>
+              <textarea class="form-textarea" placeholder="Any special requirements or medical conditions..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-checkbox">
+                <input type="checkbox" required>
+                <span style="font-size:.875rem">I confirm the above information is accurate and the blood request is genuine.</span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">📋 Submit Blood Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- ============ PAGE: EMERGENCY REQUEST ================= -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-emergency-request">
+  <section class="page-header" style="background:linear-gradient(135deg,var(--danger) 0%,#4A0000 100%)">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>🚨 Emergency Blood Request</h1>
+      <p>For urgent blood requirements - Available 24/7</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:640px">
+      <div class="emergency-alert-banner">
+        <div class="pulse" style="font-size:2rem;margin-bottom:8px">🆘</div>
+        <h3 style="color:var(--white);font-size:1.125rem">Emergency Helpline: 104</h3>
+        <p style="color:rgba(255,255,255,.85);font-size:.875rem">For life-threatening emergencies, call 104 immediately</p>
+      </div>
+      <div class="alert alert-danger">
+        <span class="alert-icon">⚠️</span>
+        <span>Emergency requests are processed within <strong>30 minutes</strong>. Please ensure all information is accurate.</span>
+      </div>
+      <div class="emergency-form">
+        <form id="emergencyRequestForm">
+          <h3 style="margin-bottom:var(--spacing-3);color:var(--danger)">🚨 Emergency Request Form</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+            <div class="form-group">
+              <label class="form-label">Blood Group Required *</label>
+              <select class="form-select" required>
+                <option value="">Select</option>
+                <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Units Required *</label>
+              <input type="number" class="form-input" placeholder="1" min="1" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Component Type *</label>
+            <select class="form-select" required><option>Whole Blood</option><option>Red Blood Cells</option><option>Platelets (Urgent)</option><option>Plasma</option></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Patient Name *</label>
+            <input type="text" class="form-input" placeholder="Patient's full name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hospital Name & Address *</label>
+            <textarea class="form-textarea" placeholder="Hospital name and full address" required style="min-height:70px"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Doctor's Name & Contact *</label>
+            <input type="text" class="form-input" placeholder="Dr. Name - Phone number" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Requester Contact Number *</label>
+            <input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Urgency Level *</label>
+            <select class="form-select" required><option>Critical - Within 1 hour</option><option>Urgent - Within 3 hours</option><option>Priority - Within 6 hours</option></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Additional Details</label>
+            <textarea class="form-textarea" placeholder="Any additional medical information..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-danger btn-block btn-lg">🚨 Submit Emergency Request</button>
+        </form>
+      </div>
+      <div style="margin-top:var(--spacing-4)">
+        <h3 style="margin-bottom:var(--spacing-2)">📞 Emergency Contacts</h3>
+        <div class="emergency-contacts">
+          <div class="emergency-contact-card"><div class="contact-icon">📞</div><div class="contact-info"><h5>Health Helpline</h5><p>104</p></div></div>
+          <div class="emergency-contact-card"><div class="contact-icon">🏥</div><div class="contact-info"><h5>GH Chennai Blood Bank</h5><p>044-2535-0123</p></div></div>
+          <div class="emergency-contact-card"><div class="contact-icon">🩸</div><div class="contact-info"><h5>TN Blood Bank Control Room</h5><p>044-2621-4567</p></div></div>
+          <div class="emergency-contact-card"><div class="contact-icon">🚑</div><div class="contact-info"><h5>Ambulance Service</h5><p>108</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- =========== PAGE: DONOR REGISTRATION ================ -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-donor-registration">
+  <section class="page-header">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>✍️ Donor Registration</h1>
+      <p>Register as a blood donor and save lives</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:640px">
+      <div class="alert alert-success">
+        <span class="alert-icon">✅</span>
+        <span>By registering, you join 52,000+ donors across Tamil Nadu. Your one donation can save up to 3 lives!</span>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <form id="donorRegForm">
+            <h3 style="margin-bottom:var(--spacing-3)">Personal Information</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+              <div class="form-group"><label class="form-label">First Name *</label><input type="text" class="form-input" placeholder="First name" required></div>
+              <div class="form-group"><label class="form-label">Last Name *</label><input type="text" class="form-input" placeholder="Last name" required></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+              <div class="form-group"><label class="form-label">Date of Birth *</label><input type="date" class="form-input" required></div>
+              <div class="form-group"><label class="form-label">Gender *</label><select class="form-select" required><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Blood Group *</label>
+              <select class="form-select" required>
+                <option value="">Select Blood Group</option>
+                <option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+              </select>
+            </div>
+            <h3 style="margin:var(--spacing-3) 0 var(--spacing-3)">Contact Information</h3>
+            <div class="form-group"><label class="form-label">Mobile Number *</label><input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX" required></div>
+            <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your.email@example.com"></div>
+            <div class="form-group"><label class="form-label">Address *</label><textarea class="form-textarea" placeholder="Enter your full address" style="min-height:70px" required></textarea></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+              <div class="form-group"><label class="form-label">District *</label><select class="form-select" required><option value="">Select</option><option>Chennai</option><option>Coimbatore</option><option>Madurai</option><option>Tiruchirappalli</option><option>Salem</option><option>Erode</option></select></div>
+              <div class="form-group"><label class="form-label">PIN Code *</label><input type="text" class="form-input" placeholder="600001" required></div>
+            </div>
+            <h3 style="margin:var(--spacing-3) 0 var(--spacing-3)">Health Information</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+              <div class="form-group"><label class="form-label">Weight (kg) *</label><input type="number" class="form-input" placeholder="55" min="50" required></div>
+              <div class="form-group"><label class="form-label">Last Donation Date</label><input type="date" class="form-input"></div>
+            </div>
+            <div class="form-group"><label class="form-label">Any Medical Conditions?</label><textarea class="form-textarea" placeholder="List any medical conditions, medications, or allergies..." style="min-height:70px"></textarea></div>
+            <div class="form-group"><label class="form-checkbox"><input type="checkbox" required><span style="font-size:.875rem">I agree to the terms and conditions and consent to being contacted for blood donation.</span></label></div>
+            <div class="form-group"><label class="form-checkbox"><input type="checkbox"><span style="font-size:.875rem">I want to receive notifications about blood donation camps in my area.</span></label></div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">✍️ Register as Donor</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- ============= PAGE: DONOR PROFILE ==================== -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-donor-profile">
+  <section class="profile-header">
+    <div class="profile-avatar">👤</div>
+    <h2>Rajesh Kumar</h2>
+    <p>Donor ID: TN-CH-05248 | Blood Group: <strong>B+</strong></p>
+    <div class="profile-stats">
+      <div class="profile-stat"><div class="value">12</div><div class="label">Donations</div></div>
+      <div class="profile-stat"><div class="value">36</div><div class="label">Lives Saved</div></div>
+      <div class="profile-stat"><div class="value">3</div><div class="label">Years</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:640px">
+      <div class="alert alert-info" style="margin-bottom:var(--spacing-3)">
+        <span class="alert-icon">📅</span>
+        <span>You're eligible to donate again on <strong>April 15, 2025</strong>. Book your next appointment!</span>
+      </div>
+      <div class="card" style="margin-bottom:var(--spacing-3)">
+        <!-- Personal Information -->
+        <div class="profile-accordion">
+          <div class="profile-menu-item accordion-trigger"><div class="menu-icon" style="background:var(--primary-bg);color:var(--primary)">👤</div><div class="menu-text"><h5>Personal Information</h5><p>View and update your personal details</p></div><span class="menu-arrow">›</span></div>
+          <div class="accordion-content">
+            <div style="padding:16px 12px;border-top:1px solid var(--gray-100)">
+              <div class="info-row"><span class="info-label">Full Name</span><span class="info-value">Rajesh Kumar</span></div>
+              <div class="info-row"><span class="info-label">Donor ID</span><span class="info-value">TN-CH-05248</span></div>
+              <div class="info-row"><span class="info-label">Blood Group</span><span class="info-value"><strong style="color:var(--danger)">B+</strong></span></div>
+              <div class="info-row"><span class="info-label">Date of Birth</span><span class="info-value">12 June 1992</span></div>
+              <div class="info-row"><span class="info-label">Gender</span><span class="info-value">Male</span></div>
+              <div class="info-row"><span class="info-label">Mobile</span><span class="info-value">+91 98765 43210</span></div>
+              <div class="info-row"><span class="info-label">Email</span><span class="info-value">rajesh.kumar@email.com</span></div>
+              <div class="info-row"><span class="info-label">City</span><span class="info-value">Chennai, Tamil Nadu</span></div>
+              <div style="margin-top:12px;text-align:center"><button class="btn btn-primary" onclick="showToast('Edit profile feature coming soon!','info')">✏️ Edit Details</button></div>
+            </div>
+          </div>
+        </div>
+        <!-- Donation History -->
+        <div class="profile-accordion">
+          <div class="profile-menu-item accordion-trigger"><div class="menu-icon" style="background:var(--success-bg);color:var(--success)">🩸</div><div class="menu-text"><h5>Donation History</h5><p>View your past donation records</p></div><span class="menu-arrow">›</span></div>
+          <div class="accordion-content">
+            <div style="padding:12px;border-top:1px solid var(--gray-100)">
+              <div class="history-item"><div class="history-date"><div class="day">15</div><div class="month">Jan</div></div><div class="history-details"><h5>GH Chennai Blood Bank</h5><p>Whole Blood - 350ml | B+ | TN-CH-05248</p></div></div>
+              <div class="history-item"><div class="history-date"><div class="day">22</div><div class="month">Oct</div></div><div class="history-details"><h5>TIDEL Park Camp</h5><p>Whole Blood - 350ml | B+ | TN-CH-05248</p></div></div>
+              <div class="history-item"><div class="history-date"><div class="day">05</div><div class="month">Jul</div></div><div class="history-details"><h5>Stanley Medical College</h5><p>Platelet Donation | B+ | TN-CH-05248</p></div></div>
+              <div class="history-item"><div class="history-date"><div class="day">18</div><div class="month">Apr</div></div><div class="history-details"><h5>GH Chennai Blood Bank</h5><p>Whole Blood - 350ml | B+ | TN-CH-05248</p></div></div>
+            </div>
+          </div>
+        </div>
+        <!-- My Blood Requests -->
+        <div class="profile-accordion">
+          <div class="profile-menu-item accordion-trigger"><div class="menu-icon" style="background:var(--info-bg);color:var(--info)">📋</div><div class="menu-text"><h5>My Blood Requests</h5><p>Track your blood request status</p></div><span class="menu-arrow">›</span></div>
+          <div class="accordion-content">
+            <div style="padding:12px;border-top:1px solid var(--gray-100)">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--gray-50);border-radius:var(--radius-md);margin-bottom:8px"><div><strong>REQ-2024-0142</strong><p style="font-size:.8rem;color:var(--gray-500)">B+ · 2 units · Apollo Hospital</p></div><span class="badge" style="background:var(--success);color:#fff">Fulfilled</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--gray-50);border-radius:var(--radius-md);margin-bottom:8px"><div><strong>REQ-2024-0098</strong><p style="font-size:.8rem;color:var(--gray-500)">O+ · 1 unit · GH Chennai</p></div><span class="badge" style="background:var(--warning);color:#fff">Pending</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--gray-50);border-radius:var(--radius-md)"><div><strong>REQ-2023-0765</strong><p style="font-size:.8rem;color:var(--gray-500)">AB+ · 3 units · Stanley Medical</p></div><span class="badge" style="background:var(--gray-300);color:var(--gray-700)">Cancelled</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Notifications -->
+        <div class="profile-accordion">
+          <div class="profile-menu-item accordion-trigger"><div class="menu-icon" style="background:var(--warning-bg);color:var(--warning)">🔔</div><div class="menu-text"><h5>Notifications</h5><p>Manage alert preferences</p></div><span class="menu-arrow">›</span></div>
+          <div class="accordion-content">
+            <div style="padding:12px;border-top:1px solid var(--gray-100)">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0"><span>Blood request alerts</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0"><span>Camp announcements</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0"><span>Donation reminders</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0"><span>Emergency appeals</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:none"><span>Weekly newsletter</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+          </div>
+        </div>
+        <!-- Upcoming Camps -->
+        <div class="profile-accordion">
+          <div class="profile-menu-item accordion-trigger"><div class="menu-icon" style="background:var(--danger-bg);color:var(--danger)">⛺</div><div class="menu-text"><h5>Upcoming Camps</h5><p>View camps you've registered for</p></div><span class="menu-arrow">›</span></div>
+          <div class="accordion-content">
+            <div style="padding:12px;border-top:1px solid var(--gray-100)">
+              <div style="padding:10px;background:var(--danger-bg);border-radius:var(--radius-md);margin-bottom:8px;border-left:3px solid var(--danger)"><strong>🏥 Anna University Blood Camp</strong><p style="font-size:.8rem;color:var(--gray-600);margin-top:4px">📅 Mar 15, 2025 · 9:00 AM - 2:00 PM</p><p style="font-size:.8rem;color:var(--gray-600)">📍 Anna University Campus, Chennai</p><span class="badge" style="background:var(--danger);color:#fff;margin-top:6px;display:inline-block">Registered ✓</span></div>
+              <div style="padding:10px;background:var(--success-bg);border-radius:var(--radius-md);border-left:3px solid var(--success)"><strong>🏢 TIDEL Park Donation Drive</strong><p style="font-size:.8rem;color:var(--gray-600);margin-top:4px">📅 Apr 05, 2025 · 10:00 AM - 4:00 PM</p><p style="font-size:.8rem;color:var(--gray-600)">📍 TIDEL Park, Taramani, Chennai</p><span class="badge" style="background:var(--success);color:#fff;margin-top:6px;display:inline-block">Registered ✓</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Achievements -->
+        <div class="profile-accordion">
+          <div class="profile-menu-item accordion-trigger"><div class="menu-icon" style="background:var(--gray-100);color:var(--gray-700)">🏆</div><div class="menu-text"><h5>Achievements</h5><p>View your donor badges and milestones</p></div><span class="menu-arrow">›</span></div>
+          <div class="accordion-content">
+            <div style="padding:12px;border-top:1px solid var(--gray-100)">
+              <div style="display:flex;flex-wrap:wrap;gap:12px">
+                <div style="text-align:center;padding:12px;background:var(--gray-50);border-radius:var(--radius-md);min-width:80px"><div style="font-size:2rem">🥇</div><div style="font-size:.75rem;font-weight:600;margin-top:4px">First Donor</div></div>
+                <div style="text-align:center;padding:12px;background:var(--gray-50);border-radius:var(--radius-md);min-width:80px"><div style="font-size:2rem">⭐</div><div style="font-size:.75rem;font-weight:600;margin-top:4px">10+ Donations</div></div>
+                <div style="text-align:center;padding:12px;background:var(--gray-50);border-radius:var(--radius-md);min-width:80px"><div style="font-size:2rem">❤️</div><div style="font-size:.75rem;font-weight:600;margin-top:4px">Life Saver</div></div>
+                <div style="text-align:center;padding:12px;background:var(--primary-bg);border-radius:var(--radius-md);min-width:80px;border:2px dashed var(--primary)"><div style="font-size:2rem;opacity:.4">🏆</div><div style="font-size:.75rem;font-weight:600;margin-top:4px;color:var(--gray-400)">20+ Donations</div></div>
+              </div>
+              <div style="margin-top:12px;padding:10px;background:var(--success-bg);border-radius:var(--radius-md);text-align:center"><p style="font-size:.85rem;color:var(--gray-700)">🎉 You've saved <strong style="color:var(--success)">36 lives</strong> through your donations! Keep it up!</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- =========== PAGE: ELIGIBILITY CHECKER ================ -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-eligibility-checker">
+  <section class="page-header">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>✅ Eligibility Checker</h1>
+      <p>Check if you're eligible to donate blood</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:640px">
+      <div class="card">
+        <div class="card-body">
+          <div class="eligibility-checker">
+            <div class="step-indicator">
+              <div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
+            </div>
+
+            <div class="eligibility-step active">
+              <div class="eligibility-question">
+                <h4>🎂 Are you between 18 and 65 years of age?</h4>
+                <div class="question-options"><div class="question-option yes">Yes</div><div class="question-option no">No</div></div>
+              </div>
+              <div style="display:flex;justify-content:flex-end;gap:12px"><button class="btn btn-primary elig-next">Next →</button></div>
+            </div>
+
+            <div class="eligibility-step">
+              <div class="eligibility-question">
+                <h4>⚖️ Do you weigh at least 50 kg (110 lbs)?</h4>
+                <div class="question-options"><div class="question-option yes">Yes</div><div class="question-option no">No</div></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:12px"><button class="btn btn-outline elig-prev">← Back</button><button class="btn btn-primary elig-next">Next →</button></div>
+            </div>
+
+            <div class="eligibility-step">
+              <div class="eligibility-question">
+                <h4>💪 Are you in generally good health today?</h4>
+                <div class="question-options"><div class="question-option yes">Yes</div><div class="question-option no">No</div></div>
+              </div>
+              <div class="eligibility-question">
+                <h4>🌡️ Is your hemoglobin level above 12.5 g/dL?</h4>
+                <div class="question-options"><div class="question-option yes">Yes</div><div class="question-option no">Not Sure</div></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:12px"><button class="btn btn-outline elig-prev">← Back</button><button class="btn btn-primary elig-next">Next →</button></div>
+            </div>
+
+            <div class="eligibility-step">
+              <div class="eligibility-question">
+                <h4>🏥 Have you had any major surgery in the last 6 months?</h4>
+                <div class="question-options"><div class="question-option no">No</div><div class="question-option yes">Yes</div></div>
+              </div>
+              <div class="eligibility-question">
+                <h4>🤰 Are you currently pregnant or breastfeeding?</h4>
+                <div class="question-options"><div class="question-option no">No</div><div class="question-option yes">Yes</div></div>
+              </div>
+              <div class="eligibility-question">
+                <h4>💊 Have you taken any antibiotics in the last 7 days?</h4>
+                <div class="question-options"><div class="question-option no">No</div><div class="question-option yes">Yes</div></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:12px"><button class="btn btn-outline elig-prev">← Back</button><button class="btn btn-primary elig-next">Check Result →</button></div>
+            </div>
+
+            <div class="eligibility-step">
+              <div class="eligibility-result" id="resultContainer">
+                <div class="result-icon" id="resultIcon">✅</div>
+                <h3 id="resultTitle" style="color:var(--success)">You Appear to Be Eligible!</h3>
+                <p id="resultText" style="color:var(--gray-600);max-width:400px;margin:var(--spacing-2) auto">Based on your answers, you may be eligible to donate blood. Final eligibility will be confirmed during the medical screening at the donation center.</p>
+                <div id="resultActions" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                  <a class="btn btn-primary btn-lg" data-nav="donor-registration" style="cursor:pointer">✍️ Register as Donor</a>
+                  <a class="btn btn-outline btn-lg" data-nav="blood-camps" style="cursor:pointer">⛺ Find Camps</a>
+                </div>
+              </div>
+              <div style="text-align:center;margin-top:var(--spacing-3)"><button class="btn btn-outline elig-restart">🔄 Check Again</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:var(--spacing-3)">
+        <div class="alert alert-warning">
+          <span class="alert-icon">⚠️</span>
+          <span>This checker provides preliminary guidance only. Final eligibility is determined by medical professionals at the donation center.</span>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h4 style="margin-bottom:var(--spacing-2)">📋 Additional Deferral Criteria</h4>
+            <div class="eligibility-criteria">
+              <div class="eligibility-item"><span class="check-icon">❌</span> Tattoo or piercing in last 6 months</div>
+              <div class="eligibility-item"><span class="check-icon">❌</span> Blood transfusion in last 12 months</div>
+              <div class="eligibility-item"><span class="check-icon">❌</span> History of hepatitis B or C</div>
+              <div class="eligibility-item"><span class="check-icon">❌</span> HIV positive or high-risk behavior</div>
+              <div class="eligibility-item"><span class="check-icon">❌</span> Diabetes on insulin therapy</div>
+              <div class="eligibility-item"><span class="check-icon">❌</span> Epilepsy or seizure disorder</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- ============ PAGE: BLOOD CAMPS ======================= -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-blood-camps">
+  <section class="page-header">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>⛺ Blood Donation Camps</h1>
+      <p>Find and register for upcoming blood donation camps</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:flex;gap:8px;margin-bottom:var(--spacing-3);flex-wrap:wrap">
+        <button class="chip active">All Camps</button>
+        <button class="chip">Upcoming</button>
+        <button class="chip">Ongoing</button>
+        <button class="chip">Completed</button>
+        <button class="chip">Near Me</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--spacing-2)">
+        <div class="camp-card"><div class="camp-card-banner">⛺<span class="camp-date-badge">Jan 26, 2025</span></div><div class="camp-card-body"><h4>Mega Blood Donation Camp - Chennai</h4><p>📍 Rajiv Gandhi Government Hospital, Egmore</p><p>🕑 9:00 AM - 5:00 PM</p><p>🎯 Target: 500 units</p></div><div class="camp-card-footer"><span class="camp-status ongoing">Ongoing</span><button class="btn btn-sm btn-primary">Register Now</button></div></div>
+        <div class="camp-card"><div class="camp-card-banner">🏥<span class="camp-date-badge">Feb 10, 2025</span></div><div class="camp-card-body"><h4>Coimbatore District Blood Drive</h4><p>📍 Coimbatore Medical College Hospital</p><p>🕑 8:00 AM - 4:00 PM</p><p>🎯 Target: 300 units</p></div><div class="camp-card-footer"><span class="camp-status upcoming">Upcoming</span><button class="btn btn-sm btn-primary">Register Now</button></div></div>
+        <div class="camp-card"><div class="camp-card-banner">❤️<span class="camp-date-badge">Feb 14, 2025</span></div><div class="camp-card-body"><h4>Valentine's Day Blood Drive - Madurai</h4><p>📍 Madurai Government Hospital</p><p>🕑 9:00 AM - 3:00 PM</p><p>🎯 Target: 200 units</p></div><div class="camp-card-footer"><span class="camp-status upcoming">Upcoming</span><button class="btn btn-sm btn-primary">Register Now</button></div></div>
+        <div class="camp-card"><div class="camp-card-banner">🏢<span class="camp-date-badge">Feb 20, 2025</span></div><div class="camp-card-body"><h4>Corporate Blood Drive - IT Corridor</h4><p>📍 TIDEL Park, Old Mahabalipuram Road</p><p>🕑 10:00 AM - 6:00 PM</p><p>🎯 Target: 400 units</p></div><div class="camp-card-footer"><span class="camp-status upcoming">Upcoming</span><button class="btn btn-sm btn-primary">Register Now</button></div></div>
+        <div class="camp-card"><div class="camp-card-banner">⛺<span class="camp-date-badge">Mar 1, 2025</span></div><div class="camp-card-body"><h4>Salem District Mega Camp</h4><p>📍 Salem Government Hospital</p><p>🕑 8:00 AM - 4:00 PM</p><p>🎯 Target: 350 units</p></div><div class="camp-card-footer"><span class="camp-status upcoming">Upcoming</span><button class="btn btn-sm btn-primary">Register Now</button></div></div>
+        <div class="camp-card"><div class="camp-card-banner">🎓<span class="camp-date-badge">Jan 10, 2025</span></div><div class="camp-card-body"><h4>Anna University Campus Drive</h4><p>📍 Anna University, Guindy, Chennai</p><p>🕑 9:00 AM - 3:00 PM</p><p>🎯 Achieved: 280/250 units</p></div><div class="camp-card-footer"><span class="camp-status completed">Completed</span><button class="btn btn-sm btn-outline">View Report</button></div></div>
+      </div>
+      <div style="margin-top:var(--spacing-5)">
+        <div class="section-title"><h2>Register a Blood Donation Camp</h2><p>Organizations can register to host a blood donation camp</p></div>
+        <div style="max-width:640px;margin:0 auto">
+          <form id="campRegForm">
+            <div class="form-group"><label class="form-label">Organization Name *</label><input type="text" class="form-input" placeholder="Enter organization name" required></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-2)">
+              <div class="form-group"><label class="form-label">Camp Date *</label><input type="date" class="form-input" required></div>
+              <div class="form-group"><label class="form-label">Expected Donors *</label><input type="number" class="form-input" placeholder="100" required></div>
+            </div>
+            <div class="form-group"><label class="form-label">Venue Address *</label><textarea class="form-textarea" placeholder="Enter complete venue address" required></textarea></div>
+            <div class="form-group"><label class="form-label">Contact Person *</label><input type="text" class="form-input" placeholder="Contact person name" required></div>
+            <div class="form-group"><label class="form-label">Contact Number *</label><input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX" required></div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">📝 Submit Camp Registration</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- ============ PAGE: HOSPITAL LOGIN ==================== -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-hospital-login">
+  <section class="page-header">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>🏥 Hospital Login</h1>
+      <p>Access the hospital portal for blood bank services</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="login-container" style="padding-top:var(--spacing-3)">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="login-icon">🏥</div>
+          <h2>Hospital Portal</h2>
+          <p>Access blood bank services for your hospital</p>
+        </div>
+        <div class="login-body">
+          <form id="hospitalLoginForm">
+            <div class="form-group"><label class="form-label">Hospital ID / Registration Number</label><input type="text" class="form-input" placeholder="Enter Hospital ID" required></div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <div style="display:flex;gap:8px">
+                <input type="password" class="form-input" placeholder="Enter password" required style="flex:1">
+                <button type="button" class="password-toggle btn-icon" style="background:var(--gray-100)">👁️</button>
+              </div>
+            </div>
+            <div class="form-group"><label class="form-checkbox"><input type="checkbox"><span style="font-size:.875rem">Remember me</span></label></div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">🔒 Login</button>
+          </form>
+        </div>
+        <div class="login-footer">
+          <p>Forgot password? <a href="#">Reset here</a></p>
+          <p style="margin-top:8px">Don't have an account? <a href="#">Register Hospital</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- ============ PAGE: BLOOD BANK LOGIN ================== -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-bloodbank-login">
+  <section class="page-header">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>🩸 Blood Bank Login</h1>
+      <p>Access the blood bank management portal</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="login-container" style="padding-top:var(--spacing-3)">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="login-icon">🩸</div>
+          <h2>Blood Bank Portal</h2>
+          <p>Manage blood inventory and donor records</p>
+        </div>
+        <div class="login-body">
+          <form id="bloodBankLoginForm">
+            <div class="form-group"><label class="form-label">Blood Bank License Number</label><input type="text" class="form-input" placeholder="Enter License Number" required></div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <div style="display:flex;gap:8px">
+                <input type="password" class="form-input" placeholder="Enter password" required style="flex:1">
+                <button type="button" class="password-toggle btn-icon" style="background:var(--gray-100)">👁️</button>
+              </div>
+            </div>
+            <div class="form-group"><label class="form-checkbox"><input type="checkbox"><span style="font-size:.875rem">Remember me</span></label></div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">🔒 Login</button>
+          </form>
+        </div>
+        <div class="login-footer">
+          <p>Forgot password? <a href="#">Reset here</a></p>
+          <p style="margin-top:8px">New blood bank? <a href="#">Apply for Registration</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- ============ PAGE: ADMIN DASHBOARD =================== -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-admin-dashboard">
+  <section class="page-header">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>📊 Admin Dashboard</h1>
+      <p>Tamil Nadu Blood Bank Management System - Admin Panel</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="stats-grid" style="margin-top:0">
+        <div class="stat-card"><div class="stat-icon red">👥</div><div class="stat-number" data-count="52480">0</div><div class="stat-label">Total Donors</div></div>
+        <div class="stat-card"><div class="stat-icon green">🩸</div><div class="stat-number" data-count="28750">0</div><div class="stat-label">Blood Units</div></div>
+        <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-number" data-count="1248">0</div><div class="stat-label">Pending Requests</div></div>
+        <div class="stat-card"><div class="stat-icon orange">⛺</div><div class="stat-number" data-count="156">0</div><div class="stat-label">Active Camps</div></div>
+      </div>
+      <div style="margin-top:var(--spacing-3)">
+        <div class="tabs">
+          <button class="tab active" data-tab="overview">Overview</button>
+          <button class="tab" data-tab="requests">Requests</button>
+          <button class="tab" data-tab="inventory">Inventory</button>
+          <button class="tab" data-tab="camps">Camps</button>
+        </div>
+        <div class="tab-content active" data-tab-content="overview">
+          <div class="dashboard-grid">
+            <div class="dashboard-card">
+              <div class="dashboard-card-header"><h4>🩸 Blood Group Distribution</h4><span class="card-action">View Details</span></div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:var(--spacing-3)">
+                <div class="blood-unit available"><span class="type">A+</span><span class="count">4,250</span></div>
+                <div class="blood-unit limited"><span class="type">A-</span><span class="count">480</span></div>
+                <div class="blood-unit available"><span class="type">B+</span><span class="count">3,820</span></div>
+                <div class="blood-unit limited"><span class="type">B-</span><span class="count">310</span></div>
+                <div class="blood-unit available"><span class="type">AB+</span><span class="count">1,950</span></div>
+                <div class="blood-unit unavailable"><span class="type">AB-</span><span class="count">85</span></div>
+                <div class="blood-unit available"><span class="type">O+</span><span class="count">5,680</span></div>
+                <div class="blood-unit limited"><span class="type">O-</span><span class="count">420</span></div>
+              </div>
+            </div>
+            <div class="dashboard-card">
+              <div class="dashboard-card-header"><h4>📋 Recent Requests</h4><span class="card-action">View All</span></div>
+              <div class="table-responsive" style="padding:var(--spacing-3)">
+                <table class="data-table">
+                  <thead><tr><th>ID</th><th>Patient</th><th>Blood</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td>#REQ-1248</td><td>R. Kumar</td><td><span class="blood-type apos">A+</span></td><td class="status-limited">Pending</td></tr>
+                    <tr><td>#REQ-1247</td><td>S. Lakshmi</td><td><span class="blood-type bneg">B-</span></td><td class="status-available">Fulfilled</td></tr>
+                    <tr><td>#REQ-1246</td><td>A. Rajan</td><td><span class="blood-type oneg">O-</span></td><td class="status-limited">Processing</td></tr>
+                    <tr><td>#REQ-1245</td><td>P. Devi</td><td><span class="blood-type abpos">AB+</span></td><td class="status-available">Fulfilled</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="dashboard-card">
+              <div class="dashboard-card-header"><h4>📈 Monthly Donations</h4><span class="card-action">This Year</span></div>
+              <div style="padding:var(--spacing-3)">
+                <div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:.813rem;margin-bottom:4px"><span>January</span><span>4,250 units</span></div><div class="progress"><div class="progress-bar" style="width:85%"></div></div></div>
+                <div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:.813rem;margin-bottom:4px"><span>February</span><span>3,820 units</span></div><div class="progress"><div class="progress-bar" style="width:76%"></div></div></div>
+                <div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:.813rem;margin-bottom:4px"><span>March</span><span>5,100 units</span></div><div class="progress"><div class="progress-bar success" style="width:100%"></div></div></div>
+                <div><div style="display:flex;justify-content:space-between;font-size:.813rem;margin-bottom:4px"><span>April</span><span>2,680 units</span></div><div class="progress"><div class="progress-bar warning" style="width:53%"></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content" data-tab-content="requests">
+          <div class="dashboard-card">
+            <div class="table-responsive" style="padding:var(--spacing-3)">
+              <table class="data-table">
+                <thead><tr><th>Request ID</th><th>Patient</th><th>Hospital</th><th>Blood</th><th>Units</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                  <tr><td>#REQ-1248</td><td>R. Kumar</td><td>GH Chennai</td><td>A+</td><td>2</td><td>2025-01-15</td><td class="status-limited">Pending</td><td><button class="btn btn-sm btn-primary">Process</button></td></tr>
+                  <tr><td>#REQ-1247</td><td>S. Lakshmi</td><td>GH Madurai</td><td>B-</td><td>1</td><td>2025-01-14</td><td class="status-available">Fulfilled</td><td><button class="btn btn-sm btn-outline">View</button></td></tr>
+                  <tr><td>#REQ-1246</td><td>A. Rajan</td><td>GH Coimbatore</td><td>O-</td><td>3</td><td>2025-01-14</td><td class="status-limited">Processing</td><td><button class="btn btn-sm btn-primary">Process</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content" data-tab-content="inventory">
+          <div class="dashboard-card">
+            <div style="padding:var(--spacing-3)">
+              <h4 style="margin-bottom:var(--spacing-2)">🩸 Blood Inventory Overview</h4>
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead><tr><th>Blood Group</th><th>Whole Blood</th><th>RBC</th><th>Platelets</th><th>Plasma</th><th>Total</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td><span class="blood-type apos">A+</span></td><td>2,100</td><td>1,200</td><td>450</td><td>500</td><td>4,250</td><td class="status-available">Available</td></tr>
+                    <tr><td><span class="blood-type aneg">A-</span></td><td>180</td><td>120</td><td>80</td><td>100</td><td>480</td><td class="status-limited">Limited</td></tr>
+                    <tr><td><span class="blood-type bpos">B+</span></td><td>1,900</td><td>1,020</td><td>400</td><td>500</td><td>3,820</td><td class="status-available">Available</td></tr>
+                    <tr><td><span class="blood-type bneg">B-</span></td><td>110</td><td>80</td><td>50</td><td>70</td><td>310</td><td class="status-limited">Limited</td></tr>
+                    <tr><td><span class="blood-type oneg">O-</span></td><td>150</td><td>100</td><td>70</td><td>100</td><td>420</td><td class="status-limited">Limited</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content" data-tab-content="camps">
+          <div class="dashboard-card">
+            <div style="padding:var(--spacing-3)">
+              <h4 style="margin-bottom:var(--spacing-2)">⛺ Active Blood Donation Camps</h4>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--spacing-2)">
+                <div class="camp-card"><div class="camp-card-banner">⛺<span class="camp-date-badge">Jan 26</span></div><div class="camp-card-body"><h4>Mega Camp - Chennai</h4><p>Rajiv Gandhi Hospital, Chennai</p></div><div class="camp-card-footer"><span class="camp-status ongoing">Ongoing</span><button class="btn btn-sm btn-primary">Manage</button></div></div>
+                <div class="camp-card"><div class="camp-card-banner">⛺<span class="camp-date-badge">Feb 10</span></div><div class="camp-card-body"><h4>Coimbatore Drive</h4><p>Coimbatore Medical College</p></div><div class="camp-card-footer"><span class="camp-status upcoming">Upcoming</span><button class="btn btn-sm btn-outline">Details</button></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ====================================================== -->
+<!-- ============ PAGE: FEEDBACK ========================== -->
+<!-- ====================================================== -->
+<div class="page-view" id="page-feedback">
+  <section class="page-header">
+    <div class="container">
+      <a class="page-header-back" data-nav="home">←</a>
+      <h1>💬 Feedback & Support</h1>
+      <p>Share your experience or get help with any issues</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:640px">
+      <div class="card" style="margin-bottom:var(--spacing-3)">
+        <div class="card-body" style="text-align:center">
+          <h3 style="margin-bottom:var(--spacing-2)">How was your experience?</h3>
+          <div class="feedback-options">
+            <div class="feedback-option"><span class="emoji">😊</span><span class="label">Excellent</span></div>
+            <div class="feedback-option"><span class="emoji">🙂</span><span class="label">Good</span></div>
+            <div class="feedback-option"><span class="emoji">😐</span><span class="label">Average</span></div>
+            <div class="feedback-option"><span class="emoji">😖</span><span class="label">Poor</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:var(--spacing-3)">
+        <div class="card-body">
+          <form id="feedbackForm">
+            <div class="form-group">
+              <label class="form-label">Category *</label>
+              <select class="form-select" required>
+                <option value="">Select Category</option>
+                <option>Blood Donation Experience</option><option>Blood Bank Service</option>
+                <option>Website/App Feedback</option><option>Camp Organization</option>
+                <option>Complaint</option><option>Suggestion</option><option>Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Your Name *</label><input type="text" class="form-input" placeholder="Enter your name" required></div>
+            <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your.email@example.com"></div>
+            <div class="form-group"><label class="form-label">Mobile Number</label><input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX"></div>
+            <div class="form-group"><label class="form-label">Your Feedback *</label><textarea class="form-textarea" placeholder="Share your experience, suggestions, or concerns..." required style="min-height:120px"></textarea></div>
+            <div class="form-group"><label class="form-label">Attach Screenshot (Optional)</label><input type="file" class="form-input" style="padding:10px" accept="image/*"></div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">💬 Submit Feedback</button>
+          </form>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:var(--spacing-3)">
+        <div class="card-body">
+          <h4 style="margin-bottom:var(--spacing-2)">❓ Frequently Asked Questions</h4>
+          <div class="faq-item"><div class="faq-question">How often can I donate blood? <span class="faq-toggle">▾</span></div><div class="faq-answer">You can donate whole blood every 3 months (90 days). Platelet donation can be done every 2 weeks.</div></div>
+          <div class="faq-item"><div class="faq-question">Is blood donation safe? <span class="faq-toggle">▾</span></div><div class="faq-answer">Yes, blood donation is completely safe. Sterile, disposable equipment is used for each donor.</div></div>
+          <div class="faq-item"><div class="faq-question">How long does donation take? <span class="faq-toggle">▾</span></div><div class="faq-answer">The actual donation takes about 8-10 minutes. The entire process including screening takes 30-45 minutes.</div></div>
+          <div class="faq-item"><div class="faq-question">What should I do after donating? <span class="faq-toggle">▾</span></div><div class="faq-answer">Rest for 10-15 minutes, drink plenty of fluids, avoid heavy exercise for 24 hours, and keep the bandage on for 4 hours.</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h4 style="margin-bottom:var(--spacing-2)">📞 Contact Support</h4>
+          <div class="emergency-contacts">
+            <div class="emergency-contact-card"><div class="contact-icon">📞</div><div class="contact-info"><h5>Helpline</h5><p>104 (24/7)</p></div></div>
+            <div class="emergency-contact-card"><div class="contact-icon">📧</div><div class="contact-info"><h5>Email Support</h5><p>support@tnbloodbank.gov.in</p></div></div>
+            <div class="emergency-contact-card"><div class="contact-icon">🏢</div><div class="contact-info"><h5>Office Address</h5><p>Directorate of Health, Chennai - 600006</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== Shared AI Assistant ===== -->
+<div class="ai-assistant">
+  <div class="ai-assistant-chat">
+    <div class="ai-chat-header">
+      <h4>🤖 Health Assistant</h4>
+      <button class="ai-chat-close">✕</button>
+    </div>
+    <div class="ai-chat-messages">
+      <div class="ai-message bot">Hello! 👋 I'm your health assistant. How can I help you today?</div>
+    </div>
+    <div class="ai-chat-input">
+      <input type="text" placeholder="Ask me anything...">
+      <button>Send</button>
+    </div>
+  </div>
+  <button class="ai-assistant-btn" aria-label="AI Assistant">🤖</button>
+  <span class="ai-assistant-label">Ask Health Assistant</span>
+</div>
+
+<!-- ===== Shared Bottom Navigation ===== -->
+<nav class="bottom-nav">
+  <a class="bottom-nav-item" data-nav="home"><span class="nav-icon">🏠</span><span>Home</span></a>
+  <a class="bottom-nav-item" data-nav="blood-availability"><span class="nav-icon">🔍</span><span>Search</span></a>
+  <a class="bottom-nav-item donate-btn" data-nav="donor-registration"><span class="nav-icon-wrap">🩸</span><span>Donate</span></a>
+  <a class="bottom-nav-item" data-nav="blood-request"><span class="nav-icon">📋</span><span>Requests</span></a>
+  <a class="bottom-nav-item" data-nav="donor-profile"><span class="nav-icon">👤</span><span>Profile</span></a>
+</nav>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== SPA Navigation ===== */
+function navigateTo(pageName){
+  document.querySelectorAll('.page-view').forEach(pv=>pv.classList.remove('active'));
+  const target=document.getElementById('page-'+pageName);
+  if(target){
+    target.classList.add('active');
+    window.scrollTo(0,0);
+    updateActiveNav(pageName);
+    if(pageName==='admin-dashboard'){animateCounters();}
+    if(pageName==='eligibility-checker'){resetEligibility();}
+  }
+}
+function updateActiveNav(pageName){
+  document.querySelectorAll('.side-nav-item').forEach(item=>{
+    item.classList.remove('active');
+    if(item.getAttribute('data-nav')===pageName){item.classList.add('active');}
+  });
+  document.querySelectorAll('.bottom-nav-item').forEach(item=>{
+    item.classList.remove('active');
+    if(item.getAttribute('data-nav')===pageName){item.classList.add('active');}
+  });
+}
+/* Event delegation for all data-nav elements */
+document.addEventListener('click',function(e){
+  const navEl=e.target.closest('[data-nav]');
+  if(navEl){
+    e.preventDefault();
+    const page=navEl.getAttribute('data-nav');
+    navigateTo(page);
+    closeSideNav();
+  }
+});
+
+/* ===== Side Navigation Toggle ===== */
+const menuBtn=document.querySelector('.menu-btn');
+const sideNav=document.querySelector('.side-nav');
+const sideNavOverlay=document.querySelector('.side-nav-overlay');
+const sideNavClose=document.querySelector('.side-nav-close');
+function isDesktop(){return window.innerWidth>=1024;}
+function openSideNav(){if(isDesktop())return;sideNav.classList.add('active');sideNavOverlay.classList.add('active');}
+function closeSideNav(){if(isDesktop())return;sideNav.classList.remove('active');sideNavOverlay.classList.remove('active');}
+if(menuBtn)menuBtn.addEventListener('click',openSideNav);
+if(sideNavOverlay)sideNavOverlay.addEventListener('click',closeSideNav);
+if(sideNavClose)sideNavClose.addEventListener('click',closeSideNav);
+/* Handle resize: close mobile drawer if crossing to desktop */
+window.addEventListener('resize',function(){if(isDesktop()){sideNav.classList.remove('active');sideNavOverlay.classList.remove('active');}});
+
+/* ===== AI Assistant Toggle ===== */
+const aiBtn=document.querySelector('.ai-assistant-btn');
+const aiChat=document.querySelector('.ai-assistant-chat');
+const aiCloseBtn=document.querySelector('.ai-chat-close');
+if(aiBtn)aiBtn.addEventListener('click',function(){aiChat.classList.toggle('active');});
+if(aiCloseBtn)aiCloseBtn.addEventListener('click',function(){aiChat.classList.remove('active');});
+/* AI chat send */
+const aiSendBtn=document.querySelector('.ai-chat-input button');
+const aiInput=document.querySelector('.ai-chat-input input');
+const aiMessages=document.querySelector('.ai-chat-messages');
+function sendAIMessage(){
+  const text=aiInput.value.trim();
+  if(!text)return;
+  const userMsg=document.createElement('div');
+  userMsg.className='ai-message user';
+  userMsg.textContent=text;
+  aiMessages.appendChild(userMsg);
+  aiInput.value='';
+  aiMessages.scrollTop=aiMessages.scrollHeight;
+  setTimeout(()=>{
+    const botMsg=document.createElement('div');
+    botMsg.className='ai-message bot';
+    const responses=['Thank you for your question! A medical professional can provide detailed guidance.','I can help you with blood donation eligibility, finding blood banks, and registering as a donor.','Please visit the nearest blood bank or call 104 for urgent assistance.'];
+    botMsg.textContent=responses[Math.floor(Math.random()*responses.length)];
+    aiMessages.appendChild(botMsg);
+    aiMessages.scrollTop=aiMessages.scrollHeight;
+  },600);
+}
+if(aiSendBtn)aiSendBtn.addEventListener('click',sendAIMessage);
+if(aiInput)aiInput.addEventListener('keypress',function(e){if(e.key==='Enter')sendAIMessage();});
+
+/* ===== Toast Notification ===== */
+function showToast(msg){
+  const toast=document.getElementById('toast');
+  toast.textContent=msg;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),3000);
+}
+
+/* ===== Form Submissions ===== */
+function handleFormSubmit(formId,successMsg){
+  const form=document.getElementById(formId);
+  if(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      showToast(successMsg);
+      form.reset();
+    });
+  }
+}
+handleFormSubmit('bloodSearchForm','🔍 Searching for blood availability...');
+handleFormSubmit('bloodRequestForm','✅ Blood request submitted successfully! We will contact you within 2 hours.');
+handleFormSubmit('emergencyRequestForm','🚨 Emergency request submitted! Our team will respond within 30 minutes.');
+handleFormSubmit('donorRegForm','🎉 Registration successful! Welcome to the TN Blood Bank donor community.');
+handleFormSubmit('campRegForm','📝 Camp registration submitted! We will review and contact you soon.');
+handleFormSubmit('hospitalLoginForm','🔐 Logging in to Hospital Portal...');
+handleFormSubmit('bloodBankLoginForm','🔐 Logging in to Blood Bank Portal...');
+handleFormSubmit('feedbackForm','💬 Thank you for your feedback! We appreciate your input.');
+
+/* ===== Password Toggle ===== */
+document.querySelectorAll('.password-toggle').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const input=this.parentElement.querySelector('input');
+    if(input.type==='password'){input.type='text';this.textContent='🙈';}
+    else{input.type='password';this.textContent='👁️';}
+  });
+});
+
+/* ===== Blood Type Filter ===== */
+function filterBloodType(type){
+  document.querySelectorAll('.blood-type-chip').forEach(chip=>{
+    chip.classList.toggle('active',chip.textContent.trim()===type);
+  });
+  const cards=document.querySelectorAll('#availabilityResults .blood-bank-card');
+  cards.forEach(card=>{
+    if(type==='All'){card.style.display='';return;}
+    const units=card.querySelectorAll('.blood-unit');
+    let match=false;
+    units.forEach(u=>{
+      const t=u.querySelector('.type').textContent.trim();
+      if(t===type){
+        u.style.outline='3px solid var(--primary)';
+        match=true;
+      }else{
+        u.style.outline='none';
+      }
+    });
+    card.style.display=match?'':'none';
+  });
+}
+
+/* ===== Feedback Rating Selection ===== */
+document.querySelectorAll('.feedback-option').forEach(opt=>{
+  opt.addEventListener('click',function(){
+    document.querySelectorAll('.feedback-option').forEach(o=>o.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+
+/* ===== FAQ Toggle ===== */
+document.querySelectorAll('.faq-question').forEach(q=>{
+  q.addEventListener('click',function(){
+    const item=this.parentElement;
+    item.classList.toggle('open');
+  });
+});
+
+/* ===== Profile Accordion Toggle ===== */
+document.querySelectorAll('.profile-accordion .accordion-trigger').forEach(trigger=>{
+  trigger.addEventListener('click',function(){
+    const accordion=this.closest('.profile-accordion');
+    const isOpen=accordion.classList.contains('open');
+    /* Close all other accordions in the same card */
+    accordion.parentElement.querySelectorAll('.profile-accordion').forEach(a=>{
+      if(a!==accordion)a.classList.remove('open');
+    });
+    /* Toggle this one */
+    accordion.classList.toggle('open');
+  });
+});
+
+/* ===== Camp Filter Chips ===== */
+document.querySelectorAll('#page-blood-camps .chip').forEach(chip=>{
+  chip.addEventListener('click',function(){
+    document.querySelectorAll('#page-blood-camps .chip').forEach(c=>c.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+/* ===== Admin Dashboard Tabs ===== */
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const tabName=this.getAttribute('data-tab');
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
+    this.classList.add('active');
+    const content=document.querySelector('[data-tab-content="'+tabName+'"]');
+    if(content)content.classList.add('active');
+  });
+});
+
+/* ===== Animated Counters ===== */
+function animateCounters(){
+  document.querySelectorAll('.stat-number').forEach(el=>{
+    const target=parseInt(el.getAttribute('data-count'));
+    if(!target)return;
+    let current=0;
+    const increment=target/60;
+    const timer=setInterval(()=>{
+      current+=increment;
+      if(current>=target){current=target;clearInterval(timer);}
+      el.textContent=Math.floor(current).toLocaleString('en-IN');
+    },20);
+  });
+}
+
+/* ===== Eligibility Checker ===== */
+let eligCurrentStep=0;
+function resetEligibility(){
+  eligCurrentStep=0;
+  const steps=document.querySelectorAll('#page-eligibility-checker .eligibility-step');
+  const dots=document.querySelectorAll('#page-eligibility-checker .step-dot');
+  steps.forEach((s,i)=>s.classList.toggle('active',i===0));
+  dots.forEach((d,i)=>d.classList.toggle('active',i===0));
+  document.querySelectorAll('#page-eligibility-checker .question-option').forEach(o=>o.classList.remove('selected'));
+}
+document.addEventListener('DOMContentLoaded',function(){
+  const steps=document.querySelectorAll('#page-eligibility-checker .eligibility-step');
+  const dots=document.querySelectorAll('#page-eligibility-checker .step-dot');
+  function updateEligUI(){
+    steps.forEach((s,i)=>s.classList.toggle('active',i===eligCurrentStep));
+    dots.forEach((d,i)=>d.classList.toggle('active',i===eligCurrentStep));
+  }
+  /* Option selection */
+  document.querySelectorAll('#page-eligibility-checker .question-option').forEach(option=>{
+    option.addEventListener('click',function(){
+      const group=this.parentElement.querySelectorAll('.question-option');
+      group.forEach(o=>o.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+  /* Next buttons */
+  document.querySelectorAll('#page-eligibility-checker .elig-next').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      const stepEl=steps[eligCurrentStep];
+      const questions=stepEl.querySelectorAll('.eligibility-question');
+      let allAnswered=true;
+      questions.forEach(q=>{
+        if(!q.querySelector('.question-option.selected')){
+          allAnswered=false;
+          q.style.outline='1px solid var(--danger)';
+          setTimeout(()=>q.style.outline='none',2000);
+        }
+      });
+      if(!allAnswered){alert('Please answer all questions on this page before moving forward.');return;}
+      if(eligCurrentStep<steps.length-1){
+        eligCurrentStep++;
+        if(eligCurrentStep===steps.length-1){calculateEligibility();}
+        updateEligUI();
+      }
+    });
+  });
+  /* Back buttons */
+  document.querySelectorAll('#page-eligibility-checker .elig-prev').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      if(eligCurrentStep>0){eligCurrentStep--;updateEligUI();}
+    });
+  });
+  /* Restart */
+  const restartBtn=document.querySelector('#page-eligibility-checker .elig-restart');
+  if(restartBtn){
+    restartBtn.addEventListener('click',function(){
+      eligCurrentStep=0;
+      document.querySelectorAll('#page-eligibility-checker .question-option').forEach(o=>o.classList.remove('selected'));
+      updateEligUI();
+    });
+  }
+  function calculateEligibility(){
+    let isEligible=true;
+    let reasons=[];
+    document.querySelectorAll('#page-eligibility-checker .eligibility-question').forEach(q=>{
+      const heading=q.querySelector('h4').textContent;
+      const selected=q.querySelector('.question-option.selected');
+      if(!selected)return;
+      const isYes=selected.classList.contains('yes');
+      if(heading.includes('18 and 65')&&!isYes){isEligible=false;reasons.push('Age must be between 18 and 65 years.');}
+      if(heading.includes('50 kg')&&!isYes){isEligible=false;reasons.push('Weight must be at least 50 kg.');}
+      if(heading.includes('good health')&&!isYes){isEligible=false;reasons.push('You must be in generally good health on the day of donation.');}
+      if(heading.includes('hemoglobin')&&!isYes){isEligible=false;reasons.push('Hemoglobin level must be above 12.5 g/dL.');}
+      if(heading.includes('surgery')&&isYes){isEligible=false;reasons.push('Major surgery requires a recovery deferral period of 6 months.');}
+      if(heading.includes('pregnant')&&isYes){isEligible=false;reasons.push('Donation is deferred during pregnancy and breastfeeding periods.');}
+      if(heading.includes('antibiotics')&&isYes){isEligible=false;reasons.push('Must be clear of antibiotic courses for at least 7 days.');}
+    });
+    const iconEl=document.getElementById('resultIcon');
+    const titleEl=document.getElementById('resultTitle');
+    const textEl=document.getElementById('resultText');
+    const actionsEl=document.getElementById('resultActions');
+    if(isEligible){
+      if(iconEl)iconEl.textContent='✅';
+      if(titleEl){titleEl.textContent='You Appear to Be Eligible!';titleEl.style.color='var(--success)';}
+      if(textEl)textEl.textContent='Based on your answers, you may be eligible to donate blood. Final eligibility will be confirmed during the medical screening at the donation center.';
+      if(actionsEl)actionsEl.style.display='flex';
+    }else{
+      if(iconEl)iconEl.textContent='❌';
+      if(titleEl){titleEl.textContent='Temporary Deferral Notice';titleEl.style.color='var(--danger)';}
+      if(textEl)textEl.innerHTML='<strong>You are currently not eligible to donate due to the following reason(s):</strong><br><ul style="text-align:left;margin-top:10px;padding-left:20px;">'+reasons.map(r=>'<li>'+r+'</li>').join('')+'</ul>';
+      if(actionsEl)actionsEl.style.display='none';
+    }
+  }
+});
+</script>
+</body>
+</html>
