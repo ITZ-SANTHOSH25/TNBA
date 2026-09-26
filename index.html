@@ -1571,7 +1571,6 @@ function handleFormSubmit(formId,successMsg){
     });
   }
 }
-handleFormSubmit('bloodSearchForm','🔍 Searching for blood availability...');
 handleFormSubmit('bloodRequestForm','✅ Blood request submitted successfully! We will contact you within 2 hours.');
 handleFormSubmit('emergencyRequestForm','🚨 Emergency request submitted! Our team will respond within 30 minutes.');
 handleFormSubmit('donorRegForm','🎉 Registration successful! Welcome to the TN Blood Bank donor community.');
@@ -1579,6 +1578,127 @@ handleFormSubmit('campRegForm','📝 Camp registration submitted! We will review
 handleFormSubmit('hospitalLoginForm','🔐 Logging in to Hospital Portal...');
 handleFormSubmit('bloodBankLoginForm','🔐 Logging in to Blood Bank Portal...');
 handleFormSubmit('feedbackForm','💬 Thank you for your feedback! We appreciate your input.');
+/* ===== Blood Availability API ===== */
+
+const bloodSearchForm = document.getElementById('bloodSearchForm');
+const availabilityResults = document.getElementById('availabilityResults');
+
+if (bloodSearchForm) {
+  bloodSearchForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const selects = bloodSearchForm.querySelectorAll('select');
+
+    const bloodGroup = selects[0].value;
+    const district = selects[1].value;
+    const component = selects[2].value;
+
+    const params = new URLSearchParams();
+
+    if (bloodGroup) {
+      params.set('bloodGroup', bloodGroup);
+    }
+
+    if (district) {
+      params.set('district', district);
+    }
+
+    if (component) {
+      params.set('component', component);
+    }
+
+    try {
+      showToast('🔍 Searching for blood availability...');
+
+      const response = await fetch(
+        `${API_URL}/api/inventory/availability?${params.toString()}`
+      );
+
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.message || 'Unable to fetch blood availability');
+      }
+
+      displayBloodAvailability(result.data);
+
+    } catch (error) {
+      console.error('Blood availability API error:', error);
+
+      showToast('❌ Unable to load blood availability');
+
+      if (availabilityResults) {
+        availabilityResults.innerHTML = `
+          <div class="empty-state">
+            <h3>Unable to load blood availability</h3>
+            <p>Please try again.</p>
+          </div>
+        `;
+      }
+    }
+  });
+}
+
+
+/* ===== Display API Blood Availability ===== */
+
+function displayBloodAvailability(data) {
+
+  if (!availabilityResults) return;
+
+  if (!data || data.length === 0) {
+    availabilityResults.innerHTML = `
+      <div class="empty-state">
+        <h3>No blood availability found</h3>
+        <p>Try changing the blood group, district or component.</p>
+      </div>
+    `;
+    return;
+  }
+
+  availabilityResults.innerHTML = data.map(item => {
+
+    let statusText = 'Unavailable';
+
+    if (item.status === 'available') {
+      statusText = 'Available';
+    } else if (item.status === 'limited') {
+      statusText = 'Limited';
+    }
+
+    return `
+      <div class="blood-bank-card">
+
+        <div class="blood-bank-header">
+          <div>
+            <h3>${item.blood_bank_name}</h3>
+            <p>${item.district}</p>
+          </div>
+        </div>
+
+        <div class="blood-unit">
+          <div class="type">${item.blood_group}</div>
+
+          <div>
+            <strong>${item.units} units</strong>
+            <span>${item.component}</span>
+          </div>
+
+          <div>
+            <span>${statusText}</span>
+          </div>
+        </div>
+
+        <div class="blood-bank-contact">
+          <p>📍 ${item.address}</p>
+          <p>📞 ${item.contact_number}</p>
+        </div>
+
+      </div>
+    `;
+
+  }).join('');
+}
 
 /* ===== Password Toggle ===== */
 document.querySelectorAll('.password-toggle').forEach(btn=>{
