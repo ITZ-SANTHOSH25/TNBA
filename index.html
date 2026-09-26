@@ -1770,18 +1770,20 @@ if (emergencyRequestForm) {
 
     const fields = emergencyRequestForm.querySelectorAll('input, select, textarea');
 
-    const patientName = fields[0].value;
-    const bloodGroup = fields[1].value;
-    const units = fields[2].value;
-    const hospitalName = fields[3].value;
-    const hospitalAddress = fields[4].value;
-    const contactNumber = fields[5].value;
-    const notes = fields[6] ? fields[6].value : '';
+    const bloodGroup = fields[0].value;
+    const units = fields[1].value;
+    const component = fields[2].value;
+    const patientName = fields[3].value;
+    const hospitalName = fields[4].value;
+    const doctorContact = fields[5].value;
+    const contactNumber = fields[6].value;
+    const urgency = fields[7].value;
+    const notes = fields[8].value;
 
     try {
       showToast('🚨 Submitting emergency request...');
 
-      const response = await fetch(`${API_URL}/api/requests`, {
+      const response = await fetch(`${API_URL}/api/emergency`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -1790,13 +1792,11 @@ if (emergencyRequestForm) {
           patientName: patientName,
           bloodGroup: bloodGroup,
           units: Number(units),
-          component: 'Whole Blood',
           hospitalName: hospitalName,
-          district: hospitalAddress,
-          contactPerson: patientName,
+          district: hospitalName,
           contactNumber: contactNumber,
-          requiredBy: new Date().toISOString(),
-          notes: `EMERGENCY REQUEST: ${notes}`
+          location: doctorContact,
+          notes: `Component: ${component} | Urgency: ${urgency} | ${notes}`
         })
       });
 
@@ -1814,7 +1814,6 @@ if (emergencyRequestForm) {
 
     } catch (error) {
       console.error('Emergency Request API Error:', error);
-
       showToast('❌ Unable to submit emergency request');
     }
   });
