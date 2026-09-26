@@ -1943,9 +1943,13 @@ if (campRegForm) {
 
     const organization = fields[0].value;
     const campDate = fields[1].value;
+    const expectedDonors = fields[2].value;
+    const venueAddress = fields[3].value;
+    const contactPerson = fields[4].value;
+    const contactNumber = fields[5].value;
 
     try {
-      showToast('⛺ Submitting camp request...');
+      showToast('⛺ Submitting camp registration...');
 
       const response = await fetch(`${API_URL}/api/camp-requests`, {
         method: 'POST',
@@ -1954,7 +1958,11 @@ if (campRegForm) {
         },
         body: JSON.stringify({
           organization,
-          campDate
+          campDate,
+          expectedDonors: Number(expectedDonors),
+          venueAddress,
+          contactPerson,
+          contactNumber
         })
       });
 
@@ -1964,8 +1972,9 @@ if (campRegForm) {
         throw new Error(result.message || 'Camp registration failed');
       }
 
+      console.log('Camp Request Saved:', result.data);
+
       showToast('✅ Camp registration submitted successfully!');
-      console.log('Camp Request:', result.data);
 
       campRegForm.reset();
 
