@@ -1700,6 +1700,68 @@ function displayBloodAvailability(data) {
   }).join('');
 }
 
+/* ===== Blood Request API ===== */
+
+const bloodRequestForm = document.getElementById('bloodRequestForm');
+
+if (bloodRequestForm) {
+  bloodRequestForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const fields = bloodRequestForm.querySelectorAll('input, select, textarea');
+
+    const patientName = fields[0].value;
+    const bloodGroup = fields[1].value;
+    const units = fields[2].value;
+    const component = fields[3].value;
+    const hospitalName = fields[4].value;
+    const hospitalAddress = fields[5].value;
+    const contactPerson = fields[6].value;
+    const contactNumber = fields[7].value;
+    const requiredBy = fields[8].value;
+    const notes = fields[9].value;
+
+    try {
+      showToast('📋 Submitting blood request...');
+
+      const response = await fetch(`${API_URL}/api/requests`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          patientName: patientName,
+          bloodGroup: bloodGroup,
+          units: Number(units),
+          component: component,
+          hospitalName: hospitalName,
+          district: hospitalAddress,
+          contactPerson: contactPerson,
+          contactNumber: contactNumber,
+          requiredBy: requiredBy,
+          notes: notes
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Blood request failed');
+      }
+
+      showToast('✅ Blood request submitted successfully!');
+
+      console.log('Blood Request Saved:', result.data);
+
+      bloodRequestForm.reset();
+
+    } catch (error) {
+      console.error('Blood Request API Error:', error);
+      showToast('❌ Unable to submit blood request');
+    }
+  });
+}
+
 /* ===== Password Toggle ===== */
 document.querySelectorAll('.password-toggle').forEach(btn=>{
   btn.addEventListener('click',function(){
