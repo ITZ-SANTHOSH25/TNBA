@@ -1973,49 +1973,6 @@ if (campRegForm) {
     }
   });
 }
-const hospitalLoginForm = document.getElementById('hospitalLoginForm');
-
-if (hospitalLoginForm) {
-  hospitalLoginForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const fields = hospitalLoginForm.querySelectorAll('input');
-
-    const email = fields[0].value;
-    const password = fields[1].value;
-
-    try {
-      showToast('🔐 Logging in...');
-
-      const response = await fetch(`${API_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Login failed');
-      }
-
-      localStorage.setItem('accessToken', result.data.accessToken);
-
-      console.log('Hospital Login:', result.data);
-
-      showToast('✅ Hospital login successful!');
-
-    } catch (error) {
-      console.error('Hospital Login Error:', error);
-      showToast('❌ ' + error.message);
-    }
-  });
-}
 
 /* ===== Password Toggle ===== */
 document.querySelectorAll('.password-toggle').forEach(btn=>{
