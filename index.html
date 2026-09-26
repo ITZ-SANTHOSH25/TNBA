@@ -1931,70 +1931,7 @@ if (donorRegForm) {
     }
   });
 }
-const donorRegForm = document.getElementById('donorRegForm');
 
-if (donorRegForm) {
-  donorRegForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const fields = donorRegForm.querySelectorAll('input, select, textarea');
-
-    const firstName = fields[0].value;
-    const lastName = fields[1].value;
-    const dateOfBirth = fields[2].value;
-    const gender = fields[3].value;
-    const bloodGroup = fields[4].value;
-    const phone = fields[5].value;
-    const email = fields[6].value;
-    const password = fields[7].value;
-    const address = fields[8].value;
-    const district = fields[9].value;
-    const pinCode = fields[10].value;
-    const weightKg = fields[11].value;
-    const lastDonationDate = fields[12].value;
-    const medicalConditions = fields[13].value;
-
-    try {
-      showToast('🩸 Registering donor...');
-
-      const response = await fetch(`${API_URL}/api/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          fullName: `${firstName} ${lastName}`,
-          phone: phone,
-          role: 'donor',
-          bloodGroup: bloodGroup,
-          dateOfBirth: dateOfBirth,
-          gender: gender,
-          weightKg: Number(weightKg),
-          district: district,
-          address: address
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Donor registration failed');
-      }
-
-      showToast('✅ Donor registration successful!');
-
-      console.log('Donor Registered:', result.data);
-
-      donorRegForm.reset();
-
-    } catch (error) {
-      console.error('Donor Registration API Error:', error);
-      showToast('❌ ' + error.message);
-    }
-  });
-}
 /* ===== Password Toggle ===== */
 document.querySelectorAll('.password-toggle').forEach(btn=>{
   btn.addEventListener('click',function(){
