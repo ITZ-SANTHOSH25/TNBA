@@ -1275,6 +1275,35 @@ img{max-width:100%}
         <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-number" data-count="1248">0</div><div class="stat-label">Pending Requests</div></div>
         <div class="stat-card"><div class="stat-icon orange">⛺</div><div class="stat-number" data-count="156">0</div><div class="stat-label">Active Camps</div></div>
       </div>
+      <div class="dashboard-card" style="margin-top:20px">
+  <div class="dashboard-card-header">
+    <h4>⛺ Camp Registration Requests</h4>
+    <span class="card-action" onclick="loadCampRequests()">Refresh</span>
+  </div>
+
+  <div class="table-responsive" style="padding:var(--spacing-3)">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Organization</th>
+          <th>Camp Date</th>
+          <th>Expected Donors</th>
+          <th>Venue</th>
+          <th>Contact Person</th>
+          <th>Contact</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="campRequestsTable">
+        <tr>
+          <td colspan="8">Loading...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
       <div style="margin-top:var(--spacing-3)">
         <div class="tabs">
           <button class="tab active" data-tab="overview">Overview</button>
@@ -1510,8 +1539,9 @@ function navigateTo(pageName){
     target.classList.add('active');
     window.scrollTo(0,0);
     updateActiveNav(pageName);
-   if(pageName==='admin-dashboard'){
+  if(pageName==='admin-dashboard'){
   animateCounters();
+  loadCampRequests();
   loadEmergencyRequests();
 }
     if(pageName==='eligibility-checker'){resetEligibility();}
@@ -1933,58 +1963,52 @@ if (donorRegForm) {
     }
   });
 }
-const campRegForm = document.getElementById('campRegForm');
+async function loadCampRequests() {
+  const table = document.getElementById('campRequestsTable');
 
-if (campRegForm) {
-  campRegForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
+  if (!table) return;
 
-    const fields = campRegForm.querySelectorAll('input, select, textarea');
+  try {
+    const token = localStorage.getItem('accessToken');
 
-    const organization = fields[0].value;
-    const campDate = fields[1].value;
-    const expectedDonors = fields[2].value;
-    const venueAddress = fields[3].value;
-    const contactPerson = fields[4].value;
-    const contactNumber = fields[5].value;
-
-    try {
-      showToast('⛺ Submitting camp registration...');
-
-      const response = await fetch(`${API_URL}/api/camp-requests`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          organization,
-          campDate,
-          expectedDonors: Number(expectedDonors),
-          venueAddress,
-          contactPerson,
-          contactNumber
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Camp registration failed');
+    const response = await fetch(`${API_URL}/api/camp-requests`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
       }
+    });
 
-      console.log('Camp Request Saved:', result.data);
+    const result = await response.json();
 
-      showToast('✅ Camp registration submitted successfully!');
-
-      campRegForm.reset();
-
-    } catch (error) {
-      console.error('Camp Registration Error:', error);
-      showToast('❌ ' + error.message);
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || 'Failed to load camp requests');
     }
-  });
-}
 
+    if (!result.data || result.data.length === 0) {
+      table.innerHTML =
+        `<tr><td colspan="8">No camp requests found.</td></tr>`;
+      return;
+    }
+
+    table.innerHTML = result.data.map(request => `
+      <tr>
+        <td>#${request.id}</td>
+        <td>${request.organization || '-'}</td>
+        <td>${request.camp_date || '-'}</td>
+        <td>${request.expected_donors || 0}</td>
+        <td>${request.venue_address || '-'}</td>
+        <td>${request.contact_person || '-'}</td>
+        <td>${request.contact_number || '-'}</td>
+        <td>${request.status || 'pending'}</td>
+      </tr>
+    `).join('');
+
+  } catch (error) {
+    console.error('Camp Requests Error:', error);
+
+    table.innerHTML =
+      `<tr><td colspan="8">❌ ${error.message}</td></tr>`;
+  }
+}
 /* ===== Password Toggle ===== */
 document.querySelectorAll('.password-toggle').forEach(btn=>{
   btn.addEventListener('click',function(){
