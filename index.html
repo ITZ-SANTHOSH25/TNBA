@@ -1528,15 +1528,34 @@ function updateActiveNav(pageName){
   });
 }
 /* Event delegation for all data-nav elements */
-document.addEventListener('click',function(e){
-  const navEl=e.target.closest('[data-nav]');
-  if(navEl){
-    e.preventDefault();
-    const page=navEl.getAttribute('data-nav');
+document.addEventListener('click', function(e) {
+  const navEl = e.target.closest('[data-nav]');
+  if (!navEl) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  const page = navEl.getAttribute('data-nav');
+
+  if (page) {
     navigateTo(page);
     closeSideNav();
   }
 });
+
+document.addEventListener('touchend', function(e) {
+  const navEl = e.target.closest('[data-nav]');
+  if (!navEl) return;
+
+  e.preventDefault();
+
+  const page = navEl.getAttribute('data-nav');
+
+  if (page) {
+    navigateTo(page);
+    closeSideNav();
+  }
+}, { passive: false });
 
 /* ===== Side Navigation Toggle ===== */
 const menuBtn=document.querySelector('.menu-btn');
