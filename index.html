@@ -1510,7 +1510,10 @@ function navigateTo(pageName){
     target.classList.add('active');
     window.scrollTo(0,0);
     updateActiveNav(pageName);
-    if(pageName==='admin-dashboard'){animateCounters();}
+   if(pageName==='admin-dashboard'){
+  animateCounters();
+  loadEmergencyRequests();
+}
     if(pageName==='eligibility-checker'){resetEligibility();}
   }
 }
@@ -1927,6 +1930,50 @@ document.querySelectorAll('.tab').forEach(tab=>{
     if(content)content.classList.add('active');
   });
 });
+/* ===== Load Emergency Requests ===== */
+async function loadEmergencyRequests() {
+  const table = document.getElementById('emergencyRequestsTable');
+
+  if (!table) return;
+
+  try {
+    const response = await fetch(`${API_URL}/api/emergency`);
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || 'Failed to load emergency requests');
+    }
+
+    if (!result.data || result.data.length === 0) {
+      table.innerHTML = `
+        <tr>
+          <td colspan="6">No emergency requests found.</td>
+        </tr>
+      `;
+      return;
+    }
+
+    table.innerHTML = result.data.map(request => `
+      <tr>
+        <td>${request.emergency_code || '-'}</td>
+        <td>${request.patient_name || '-'}</td>
+        <td>${request.blood_group || '-'}</td>
+        <td>${request.units || '-'}</td>
+        <td>${request.hospital_name || '-'}</td>
+        <td>${request.contact_number || '-'}</td>
+      </tr>
+    `).join('');
+
+  } catch (error) {
+    console.error('Emergency Requests Error:', error);
+
+    table.innerHTML = `
+      <tr>
+        <td colspan="6">❌ Unable to load emergency requests</td>
+      </tr>
+    `;
+  }
+}
 
 /* ===== Animated Counters ===== */
 function animateCounters(){
