@@ -1572,7 +1572,6 @@ function handleFormSubmit(formId,successMsg){
   }
 }
 
-handleFormSubmit('emergencyRequestForm','🚨 Emergency request submitted! Our team will respond within 30 minutes.');
 handleFormSubmit('donorRegForm','🎉 Registration successful! Welcome to the TN Blood Bank donor community.');
 handleFormSubmit('campRegForm','📝 Camp registration submitted! We will review and contact you soon.');
 handleFormSubmit('hospitalLoginForm','🔐 Logging in to Hospital Portal...');
@@ -1761,7 +1760,65 @@ if (bloodRequestForm) {
     }
   });
 }
+/* ===== Emergency Blood Request API ===== */
 
+const emergencyRequestForm = document.getElementById('emergencyRequestForm');
+
+if (emergencyRequestForm) {
+  emergencyRequestForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const fields = emergencyRequestForm.querySelectorAll('input, select, textarea');
+
+    const patientName = fields[0].value;
+    const bloodGroup = fields[1].value;
+    const units = fields[2].value;
+    const hospitalName = fields[3].value;
+    const hospitalAddress = fields[4].value;
+    const contactNumber = fields[5].value;
+    const notes = fields[6] ? fields[6].value : '';
+
+    try {
+      showToast('🚨 Submitting emergency request...');
+
+      const response = await fetch(`${API_URL}/api/requests`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          patientName: patientName,
+          bloodGroup: bloodGroup,
+          units: Number(units),
+          component: 'Whole Blood',
+          hospitalName: hospitalName,
+          district: hospitalAddress,
+          contactPerson: patientName,
+          contactNumber: contactNumber,
+          requiredBy: new Date().toISOString(),
+          notes: `EMERGENCY REQUEST: ${notes}`
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Emergency request failed');
+      }
+
+      showToast('✅ Emergency request submitted successfully!');
+
+      console.log('Emergency Request Saved:', result.data);
+
+      emergencyRequestForm.reset();
+
+    } catch (error) {
+      console.error('Emergency Request API Error:', error);
+
+      showToast('❌ Unable to submit emergency request');
+    }
+  });
+}
 /* ===== Password Toggle ===== */
 document.querySelectorAll('.password-toggle').forEach(btn=>{
   btn.addEventListener('click',function(){
