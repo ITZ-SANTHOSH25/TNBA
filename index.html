@@ -1621,9 +1621,11 @@ function handleFormSubmit(formId,successMsg){
     });
   }
 }
-
-
-
+document.querySelectorAll('.camp-card-footer .btn-primary').forEach(button => {
+  button.addEventListener('click', function () {
+    navigateTo('donor-registration');
+  });
+});
 handleFormSubmit('bloodBankLoginForm','🔐 Logging in to Blood Bank Portal...');
 handleFormSubmit('feedbackForm','💬 Thank you for your feedback! We appreciate your input.');
 /* ===== Blood Availability API ===== */
