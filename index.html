@@ -1623,7 +1623,7 @@ function handleFormSubmit(formId,successMsg){
 }
 
 
-handleFormSubmit('campRegForm','📝 Camp registration submitted! We will review and contact you soon.');
+
 handleFormSubmit('bloodBankLoginForm','🔐 Logging in to Blood Bank Portal...');
 handleFormSubmit('feedbackForm','💬 Thank you for your feedback! We appreciate your input.');
 /* ===== Blood Availability API ===== */
@@ -1927,6 +1927,91 @@ if (donorRegForm) {
 
     } catch (error) {
       console.error('Donor Registration API Error:', error);
+      showToast('❌ ' + error.message);
+    }
+  });
+}
+const campRegForm = document.getElementById('campRegForm');
+
+if (campRegForm) {
+  campRegForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const fields = campRegForm.querySelectorAll('input, select, textarea');
+
+    const organization = fields[0].value;
+    const campDate = fields[1].value;
+
+    try {
+      showToast('⛺ Submitting camp request...');
+
+      const response = await fetch(`${API_URL}/api/camp-requests`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          organization,
+          campDate
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Camp registration failed');
+      }
+
+      showToast('✅ Camp registration submitted successfully!');
+      console.log('Camp Request:', result.data);
+
+      campRegForm.reset();
+
+    } catch (error) {
+      console.error('Camp Registration Error:', error);
+      showToast('❌ ' + error.message);
+    }
+  });
+}
+const hospitalLoginForm = document.getElementById('hospitalLoginForm');
+
+if (hospitalLoginForm) {
+  hospitalLoginForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const fields = hospitalLoginForm.querySelectorAll('input');
+
+    const email = fields[0].value;
+    const password = fields[1].value;
+
+    try {
+      showToast('🔐 Logging in...');
+
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Login failed');
+      }
+
+      localStorage.setItem('accessToken', result.data.accessToken);
+
+      console.log('Hospital Login:', result.data);
+
+      showToast('✅ Hospital login successful!');
+
+    } catch (error) {
+      console.error('Hospital Login Error:', error);
       showToast('❌ ' + error.message);
     }
   });
